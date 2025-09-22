@@ -6,7 +6,7 @@
 #    By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/22 10:14:02 by skayed            #+#    #+#              #
-#    Updated: 2025/09/22 11:12:29 by skayed           ###   ########.fr        #
+#    Updated: 2025/09/22 15:51:11 by skayed           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,9 @@ MINILIBX = $(MINILIBX_PATH)/libmlx.a
 LIBFT_PATH = libraries/libft
 LIBFT = $(LIBFT_PATH)/libft.a
 
-SRC = main.c
+SRC = main.c \
+	parsing/check_cub.c \
+	parsing/parsing_utils.c 
 OBJ = $(SRC: .c=.o)
 
 all: $(NAME)
