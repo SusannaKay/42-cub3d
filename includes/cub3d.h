@@ -20,22 +20,37 @@
 
 typedef struct s_mlx
 {
-	void	*mlx;
-	void	*win;
-}			t_mlx;
+}				t_mlx;
 
 typedef struct s_map
 {
-}			t_map;
+	char		**map;
+	char		*filename;
+	int			p_x;
+	int			p_y;
+	char		p_orient;
+}				t_map;
+
+typedef struct s_graphics
+{
+	void		*no;
+	void		*so;
+	void		*we;
+	void		*ea;
+	int			*floor;
+	int			*ceiling;
+}				t_graphics;
 
 typedef struct s_game
 {
-	t_mlx	*mlx;
-	t_map	*map;
-}			t_game;
+	t_map		*map;
+	t_graphics	*graphics;
+	void		*mlx;
+	void		*win;
+}				t_game;
 
-char		*ft_strcpy(char *src, char *dst);
-int			check_cub(char *filename);
-
+char			*ft_strcpy(char *src, char *dst);
+int				check_cub(char *filename);
+t_game	*init_game(t_game *game);
 
 #endif
