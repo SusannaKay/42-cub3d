@@ -18,10 +18,6 @@
 # define LEFT 97
 # define RIGHT 100
 
-typedef struct s_mlx
-{
-}				t_mlx;
-
 typedef struct s_map
 {
 	char		**map;
@@ -49,8 +45,9 @@ typedef struct s_game
 	void		*win;
 }				t_game;
 
-char			*ft_strcpy(char *src, char *dst);
 int				check_cub(char *filename);
-t_game	*init_game(t_game *game);
+t_game			*init_game(t_game *game);
+void			error_exit(char *msg, t_game *game);
+void	free_map(t_map *map);
 
 #endif

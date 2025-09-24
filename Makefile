@@ -6,7 +6,7 @@
 #    By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/22 10:14:02 by skayed            #+#    #+#              #
-#    Updated: 2025/09/23 16:37:58 by skayed           ###   ########.fr        #
+#    Updated: 2025/09/24 14:14:31 by skayed           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,8 @@ LIBFT = $(LIBFT_PATH)/libft.a
 SRC = main.c \
 	parsing/check_cub.c \
 	parsing/parsing_utils.c \
-	utils/init_struct.c
+	utils/init_struct.c \
+	utils/exit.c 
 OBJ = $(SRC: .c=.o)
 
 all: $(NAME)

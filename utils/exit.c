@@ -6,13 +6,13 @@
 /*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 13:57:26 by skayed            #+#    #+#             */
-/*   Updated: 2025/09/24 14:12:37 by skayed           ###   ########.fr       */
+/*   Updated: 2025/09/24 15:30:17 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-static void	free_map(t_map *map)
+void	free_map(t_map *map)
 {
 	int	i;
 
@@ -35,7 +35,7 @@ static void	free_map(t_map *map)
 	free(map);
 }
 
-static void	free_graphics(t_graphics *graphics, void	*mlx)
+void	free_graphics(t_graphics *graphics, void *mlx)
 {
 	if (graphics)
 	{

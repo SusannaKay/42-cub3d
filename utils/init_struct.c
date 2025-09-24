@@ -6,7 +6,7 @@
 /*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 15:23:31 by skayed            #+#    #+#             */
-/*   Updated: 2025/09/23 16:47:18 by skayed           ###   ########.fr       */
+/*   Updated: 2025/09/24 15:43:06 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static t_graphics	*init_graphics(t_graphics *graphics)
 {
 	graphics = malloc(sizeof(t_graphics));
 	if (!graphics)
-		return (NULL);
+		return (error_exit(perror));
 	graphics->no = NULL;
 	graphics->so = NULL;
 	graphics->we = NULL;
@@ -30,7 +30,7 @@ t_map	*init_map(t_map *map)
 {
 	map = malloc(sizeof(t_map));
 	if (!map)
-		return (NULL);
+		return(error_exit(perror, NULL));
 	map->map = NULL;
 	map->filename = NULL;
 	map->p_x = 0;
@@ -44,7 +44,8 @@ t_game	*init_game(t_game *game)
 	t_graphics *graphics;
 	
 	graphics = init_graphics(graphics);
-	(!graphics) return (NULL);
+	if (!graphics)
+		return (NULL);
 	game = malloc(sizeof(t_game));
 	if (!game)
 		return (NULL);
