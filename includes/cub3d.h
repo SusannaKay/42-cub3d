@@ -22,6 +22,7 @@ typedef struct s_map
 {
 	char		**map;
 	char		*filename;
+	int			in_map;
 	int			p_x;
 	int			p_y;
 	char		p_orient;

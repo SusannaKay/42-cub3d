@@ -6,7 +6,7 @@
 /*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 12:22:27 by skayed            #+#    #+#             */
-/*   Updated: 2025/09/24 16:13:08 by skayed           ###   ########.fr       */
+/*   Updated: 2025/09/24 17:00:32 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,21 @@
 int	main(int argc, char **argv)
 {
 	t_game *game;
-	t_map *map;
 
 	if (argc == 2)
 	{
 		if (!ft_strnstr(argv[1], ".cub", ft_strlen(argv[1])))
 			return (error_exit("Map format should be *.cub", game), 1);
-		// inizializza strutture mappa
 		// check file e mappa passando puntatori alle struct che servono
 		// init grafico e init mlx
 		game = ft_calloc(1, sizeof(t_game));
 		if (!game)
-			return(error_exit(perror, NULL), -1);
-		game->map = init_map(map);
-		map->filename = argv[1];
+			return(error_exit(perror, game), -1);
+		game->map = ft_calloc(1, sizeof(t_map));
+		if(!game->map)
+			return(error_exit(perror, game), -1);
+		game->map->filename = argv[1];
+		check_cub(game);
 		init_game(game);
 		game->map = map;
 		mlx_loop(mlx->mlx);
