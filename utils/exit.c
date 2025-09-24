@@ -6,7 +6,7 @@
 /*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 13:57:26 by skayed            #+#    #+#             */
-/*   Updated: 2025/09/24 15:30:17 by skayed           ###   ########.fr       */
+/*   Updated: 2025/09/24 15:56:12 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static void	free_all(t_game *game)
 	if (game->map)
 		free_map(game->map);
 	if (game->graphics)
-		free_graphics(game->mlx, game->map);
+		free_graphics(game->mlx, game->graphics);
 	if (game->mlx)
 		mlx_loop_end(game->mlx);
 	if (game->win)
