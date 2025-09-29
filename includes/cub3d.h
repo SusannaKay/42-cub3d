@@ -20,11 +20,11 @@
 
 typedef enum e_tex
 {
-	TEX_NO = 0;
-	TEX_SO = 1;
-	TEX_WE = 2;
-	TEX_EA = 3;
-	TEX_COUNT = 4;
+	TEX_NO = 0,
+	TEX_SO = 1,
+	TEX_WE = 2,
+	TEX_EA = 3,
+	TEX_COUNT = 4,
 }	t_tex;
 typedef struct s_map
 {

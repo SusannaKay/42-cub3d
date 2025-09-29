@@ -6,7 +6,7 @@
 /*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 13:57:26 by skayed            #+#    #+#             */
-/*   Updated: 2025/09/29 12:34:37 by skayed           ###   ########.fr       */
+/*   Updated: 2025/09/29 14:18:24 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	free_graphics(t_graphics *graphics, void *mlx)
 				free(graphics->flags[i]);
 			if (graphics->paths[i])
 				free(graphics->paths[i]);
+			i++;
 		}
 		// manca free floor e ceiling
 	}

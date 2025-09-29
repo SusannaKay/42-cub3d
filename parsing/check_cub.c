@@ -6,7 +6,7 @@
 /*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 14:25:17 by skayed            #+#    #+#             */
-/*   Updated: 2025/09/29 12:30:12 by skayed           ###   ########.fr       */
+/*   Updated: 2025/09/29 14:17:21 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ static int	check_gstruct(t_graphics *graphics)
 	{
 		if (!graphics->paths[i] || graphics->paths[i] == NULL)
 			return (-1);
-		if (!graphics->floor || !graphics->ceiling)
-			return (-1);
+		i++;
 	}
+	// manca check floor e ceiling
 	return (0);
 }
 
