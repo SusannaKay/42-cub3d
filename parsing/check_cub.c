@@ -6,7 +6,7 @@
 /*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 14:25:17 by skayed            #+#    #+#             */
-/*   Updated: 2025/09/29 12:16:18 by skayed           ###   ########.fr       */
+/*   Updated: 2025/09/29 12:30:12 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,23 +32,27 @@
 // AGGIUNGI AD ARRAY
 static int	check_gstruct(t_graphics *graphics)
 {
-	if (!graphics->no || !graphics->so | !graphics->we | !graphics->ea)
-		return (0);
-	if (!graphics->floor || !graphics->celing)
-		return (0);
-	return (1);
+	int	i;
+
+	i = 0;
+	while (i < TEX_COUNT)
+	{
+		if (!graphics->paths[i] || graphics->paths[i] == NULL)
+			return (-1);
+		if (!graphics->floor || !graphics->ceiling)
+			return (-1);
+	}
+	return (0);
 }
 
 static int	parse_textures(char *line, t_graphics *graphics)
 {
-	int			i;
-	const char	*flags[TEX_COUNT];
+	int	i;
 
-	flags = {"NO", "SO", "WE", "EA"};
 	i = 0;
 	while (i < TEX_COUNT)
 	{
-		if (!ft_strncmp(line, flags[i], 2))
+		if (!ft_strncmp(line, graphics->flags[i], 2))
 		{
 			line += 2;
 			while (*line)
@@ -91,12 +95,14 @@ int	check_cub(t_game *game)
 		}
 		else // non stiamo nella mappa
 		{
-			if (!check_graphics(line))
-				while (line[i])
-				{
-					se trovi 0, 1 ecc in map break else i++;
-				}
+			if (!parse_textures(line, game->graphics))
 		}
 	}
 	close(fd);
 }
+
+if (!check_graphics(line))
+	while (line[i])
+	{
+		se trovi 0, 1 ecc in map break else i++;
+	}

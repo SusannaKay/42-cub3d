@@ -6,7 +6,7 @@
 /*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 13:57:26 by skayed            #+#    #+#             */
-/*   Updated: 2025/09/24 15:56:12 by skayed           ###   ########.fr       */
+/*   Updated: 2025/09/29 12:34:37 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,16 +37,21 @@ void	free_map(t_map *map)
 
 void	free_graphics(t_graphics *graphics, void *mlx)
 {
+	int	i;
+
+	i = 0;
 	if (graphics)
 	{
-		if (graphics->no)
-			mlx_destroy_image(mlx, graphics->no);
-		if (graphics->so)
-			mlx_destroy_image(mlx, graphics->so);
-		if (graphics->we)
-			mlx_destroy_image(mlx, graphics->we);
-		if (graphics->ea)
-			mlx_destroy_image(mlx, graphics->ea);
+		while (i < TEX_COUNT)
+		{
+			if (graphics->wall_img[i])
+				mlx_destroy_image(mlx, graphics->wall_img[i]);
+			if (graphics->flags[i])
+				free(graphics->flags[i]);
+			if (graphics->paths[i])
+				free(graphics->paths[i]);
+		}
+		// manca free floor e ceiling
 	}
 	free(graphics);
 }
