@@ -18,6 +18,14 @@
 # define LEFT 97
 # define RIGHT 100
 
+typedef enum e_tex
+{
+	TEX_NO = 0;
+	TEX_SO = 1;
+	TEX_WE = 2;
+	TEX_EA = 3;
+	TEX_COUNT = 4;
+}	t_tex;
 typedef struct s_map
 {
 	char		**map;
@@ -25,17 +33,16 @@ typedef struct s_map
 	int			in_map;
 	int			p_x;
 	int			p_y;
-	char		p_orient;
+	char		p_dir;
 }				t_map;
 
 typedef struct s_graphics
 {
-	void		*no;
-	void		*so;
-	void		*we;
-	void		*ea;
-	int			*floor;
-	int			*ceiling;
+	const char *flags[TEX_COUNT];
+	char		*paths[TEX_COUNT];
+	void		*wall_img[TEX_COUNT];
+	int			floor[3];
+	int			ceiling[3];
 }				t_graphics;
 
 typedef struct s_game
@@ -49,6 +56,6 @@ typedef struct s_game
 int				check_cub(char *filename);
 t_game			*init_game(t_game *game);
 void			error_exit(char *msg, t_game *game);
-void	free_map(t_map *map);
+void			free_map(t_map *map);
 
 #endif

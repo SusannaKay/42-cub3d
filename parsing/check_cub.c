@@ -6,7 +6,7 @@
 /*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 14:25:17 by skayed            #+#    #+#             */
-/*   Updated: 2025/09/24 17:20:53 by skayed           ###   ########.fr       */
+/*   Updated: 2025/09/29 12:16:18 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 // CHECK TEXTURE E COLORI
 // NON CI SONO --> Error
 // CI SONO CHECK MAPPA
+
 // NON E' IN MAP
 // CHECK PER OGNI TEXTURE
 // ESISTE GIA'? --> Error
@@ -29,7 +30,7 @@
 // CHECK VALORI TRA 0 E 255
 // CHECK 3 VALORI
 // AGGIUNGI AD ARRAY
-static int	check_textures(t_graphics *graphics)
+static int	check_gstruct(t_graphics *graphics)
 {
 	if (!graphics->no || !graphics->so | !graphics->we | !graphics->ea)
 		return (0);
@@ -37,11 +38,42 @@ static int	check_textures(t_graphics *graphics)
 		return (0);
 	return (1);
 }
+
+static int	parse_textures(char *line, t_graphics *graphics)
+{
+	int			i;
+	const char	*flags[TEX_COUNT];
+
+	flags = {"NO", "SO", "WE", "EA"};
+	i = 0;
+	while (i < TEX_COUNT)
+	{
+		if (!ft_strncmp(line, flags[i], 2))
+		{
+			line += 2;
+			while (*line)
+			{
+				if (*line != ' ')
+				{
+					if (graphics->paths[i] != NULL)
+						return (-1); // duplicao
+					graphics->paths[i] = ft_strdup(line);
+					if (!graphics->paths[i])
+						return (-1); // malloc
+					return (1);
+				}
+				line++;
+			}
+		}
+		i++;
+	}
+	return (0);
+}
+
 int	check_cub(t_game *game)
 {
-	int fd;
-	char *line;
-	char *pos;
+	int		fd;
+	char	*line;
 
 	fd = open(game->map->filename, O_RDONLY);
 	if (fd < 0)
@@ -51,30 +83,19 @@ int	check_cub(t_game *game)
 	{
 		if (game->map->in_map)
 		{
-			if (check_textures(game->graphics))
+			if (check_gstruct(game->graphics))
+				// controlla se manca qualche info grafica
 				check_map();
 			else
-				return(error_exit("File .cub not valid", game));
+				return (error_exit("File .cub not valid", game));
 		}
-		else
+		else // non stiamo nella mappa
 		{
 			if (!check_graphics(line))
-				while(line[i])
-			{
-				se trovi 0, 1 ecc in map break
-				else 
-					i++;
-			}
-		}
-	}
-
-	if (ft_strnstr(line, "NO"))
-	{
-		pos = ft_strnstr(line, "NO");
-		while (pos)
-		{
-			if (*pos == '.')
-				ft_strdup(pos);
+				while (line[i])
+				{
+					se trovi 0, 1 ecc in map break else i++;
+				}
 		}
 	}
 	close(fd);

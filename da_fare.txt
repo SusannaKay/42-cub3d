@@ -1,3 +1,6 @@
 funzione check_map
 parsing file cub :
 ->int check_graphics
+
+
+
