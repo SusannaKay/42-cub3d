@@ -25,7 +25,7 @@ typedef enum e_tex
 	TEX_WE = 2,
 	TEX_EA = 3,
 	TEX_COUNT = 4,
-}	t_tex;
+}				t_tex;
 typedef struct s_map
 {
 	char		**map;
@@ -37,7 +37,7 @@ typedef struct s_map
 
 typedef struct s_graphics
 {
-	const char *flags[TEX_COUNT];
+	const char	*flags[TEX_COUNT];
 	char		*paths[TEX_COUNT];
 	void		*wall_img[TEX_COUNT];
 	int			floor[3];
@@ -61,10 +61,11 @@ typedef struct s_game
 }				t_game;
 
 int				check_cub(t_game *game);
-void				init_graphics_defaults(t_graphics *graphics);
-void				init_map_defaults(t_map *map);
+void			init_graphics_defaults(t_graphics *graphics);
+void			init_map_defaults(t_map *map);
 t_game			*init_game(t_game *game);
 void			error_exit(char *msg, t_game *game);
 void			free_map(t_map *map);
+char	*check_line(char *line);
 
 #endif

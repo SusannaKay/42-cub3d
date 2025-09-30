@@ -6,7 +6,7 @@
 /*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 14:25:17 by skayed            #+#    #+#             */
-/*   Updated: 2025/09/30 16:20:12 by skayed           ###   ########.fr       */
+/*   Updated: 2025/09/30 16:38:15 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,9 @@ static int	parse_textures(char *line, t_graphics *graphics)
 	int	i;
 
 	i = 0;
+	line = check_line(line);
+	if(!line)
+		return (0);
 	while (i < TEX_COUNT)
 	{
 		if (!ft_strncmp(line, graphics->flags[i], 2))
@@ -60,7 +63,7 @@ static int	parse_textures(char *line, t_graphics *graphics)
 				if (*line != ' ')
 				{
 					if (graphics->paths[i] != NULL)
-						return (-1); // duplicao
+						return (-1); // duplicato
 					graphics->paths[i] = ft_strdup(line);
 					if (!graphics->paths[i])
 						return (-1); // malloc
