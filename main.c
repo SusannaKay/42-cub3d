@@ -6,12 +6,24 @@
 /*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 12:22:27 by skayed            #+#    #+#             */
-/*   Updated: 2025/09/24 17:00:32 by skayed           ###   ########.fr       */
+/*   Updated: 2025/09/30 16:16:49 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/cub3d.h"
-
+void init_graphics(t_graphics *graphics)
+{
+	graphics->flags[TEX_NO] = "NO";
+	graphics->flags[TEX_SO] = "SO";
+	graphics->flags[TEX_WE] = "WE";
+	graphics->flags[TEX_EA] = "EA";
+	graphics->floor[0] = -1;
+	graphics->floor[1] = -1;
+	graphics->floor[2] = -1;
+	graphics->ceiling[0] = -1;
+	graphics->ceiling[1] = -1;
+	graphics->ceiling[2] = -1;
+}
 int	main(int argc, char **argv)
 {
 	t_game *game;
@@ -25,6 +37,10 @@ int	main(int argc, char **argv)
 		game = ft_calloc(1, sizeof(t_game));
 		if (!game)
 			return(error_exit(perror, game), -1);
+		game->graphics = ft_calloc(1, sizeof(t_graphics));
+		if(!game->graphics)
+			return(error_exit(perror, game), -1);
+		init_graphics(game->graphics);
 		game->map = ft_calloc(1, sizeof(t_map));
 		if(!game->map)
 			return(error_exit(perror, game), -1);

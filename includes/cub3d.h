@@ -31,9 +31,8 @@ typedef struct s_map
 	char		**map;
 	char		*filename;
 	int			in_map;
-	int			p_x;
-	int			p_y;
-	char		p_dir;
+	int			height;
+	int			width;
 }				t_map;
 
 typedef struct s_graphics
@@ -45,15 +44,25 @@ typedef struct s_graphics
 	int			ceiling[3];
 }				t_graphics;
 
+typedef struct s_player
+{
+	int			p_x;
+	int			p_y;
+	char		p_dir;
+}				t_player;
+
 typedef struct s_game
 {
 	t_map		*map;
 	t_graphics	*graphics;
+	t_player	*player;
 	void		*mlx;
 	void		*win;
 }				t_game;
 
-int				check_cub(char *filename);
+int				check_cub(t_game *game);
+void				init_graphics_defaults(t_graphics *graphics);
+void				init_map_defaults(t_map *map);
 t_game			*init_game(t_game *game);
 void			error_exit(char *msg, t_game *game);
 void			free_map(t_map *map);

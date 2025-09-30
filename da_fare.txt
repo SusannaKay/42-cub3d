@@ -1,9 +1,71 @@
-funzione check_map
-parsing file cub :
-->int check_graphics
+✅ Creare struttura dati principale t_game che contiene: map, graphics, player, MLX.
+
+📂 Fase 1 – Parsing della mappa .cub
+
+- [✅] Aprire il file `.cub` con `open`, fallire con `error_exit` se la syscall non riesce.
+- [✅] Leggere il file con `get_next_line`, normalizzare le righe (trim destro) e saltare righe vuote finché non servono.
+- [✅] Implementare `parse_textures` per riconoscere `NO/SO/WE/EA`, salvare path senza spazi iniziali e bloccare i duplicati.
+- [ ] Verificare che i file delle texture siano accessibili (`open`/`close`) prima di salvarli.
+- [ ] Implementare un helper `parse_rgb` che splitta `F` e `C` su `,`, converte in int e valida range 0-255.
+- [ ] Assicurare che `graphics->floor` e `graphics->ceiling` vengano valorizzati una sola volta e segnalare errori di duplicati.
+- [ ] Quando compare una riga di mappa, impostare `map->in_map` e salvare tutte le righe successive (inclusi spazi) in `map->map`.
+- [ ] Aggiornare `map->width` e `map->height`, normalizzando le righe più corte con spazi per ottenere una matrice rettangolare.
+- [ ] Controllare che ogni riga della mappa contenga solo caratteri validi (`0`, `1`, `N`, `S`, `E`, `W` e spazi).
+- [ ] Identificare posizione e direzione del player, trasferendo le coordinate in `t_player` e assicurandosi che ce ne sia uno solo.
+- [ ] Implementare il controllo di chiusura della mappa (nessun `0` esposto a spazi o fuori mappa).
+- [ ] Gestire gli errori liberando le risorse e stampando `Error\n<msg>` tramite `error_exit`.
 
 
+🎨 Fase 2 – Setup grafica
 
-FUNZIONI EXIT :
+✅ Inizializzare finestra MLX (mlx_init, mlx_new_window).
 
-manca free floor e ceiling
+ Caricare texture con mlx_xpm_file_to_image.
+
+ Creare image buffer (mlx_new_image) per disegnare pixel.
+
+ Funzione per convertire (r,g,b) in int32.
+
+🧭 Fase 3 – Player e movimenti
+
+ Struttura t_player con posizione (x,y), direzione (dx,dy), piano camera.
+
+ Inizializzare direzione in base al carattere di spawn (N,S,E,W).
+
+ Gestire input tastiera:
+
+W/A/S/D → movimento avanti/indietro/laterale.
+
+←/→ → rotazione camera.
+
+ESC → exit clean.
+
+ Collisioni con i muri (blocco movimento se tile=1).
+
+🔦 Fase 4 – Raycasting
+
+ Implementare algoritmo DDA:
+
+Per ogni colonna di pixel della finestra → calcolare rayDir.
+
+Trovare distanza al primo muro (stepX, stepY).
+
+Calcolare distanza corretta (per evitare fish-eye).
+
+ Disegnare linea verticale in base all’altezza del muro.
+
+ Applicare la texture giusta in base al lato colpito (N,S,E,W).
+
+🌈 Fase 5 – Floor e Ceiling
+
+ Riempire metà superiore con colore ceiling, metà inferiore con floor.
+
+ Ottimizzare disegno: prima riempire background, poi disegnare muri.
+
+🧹 Fase 6 – Pulizia e gestione memoria
+
+ Free di texture, mappa, finestra MLX.
+
+ Chiudere programma con X sulla finestra.
+
+ Controllo Valgrind: nessuna perdita di memoria.

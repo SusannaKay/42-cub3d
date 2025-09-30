@@ -6,7 +6,7 @@
 /*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 14:25:17 by skayed            #+#    #+#             */
-/*   Updated: 2025/09/29 14:17:21 by skayed           ###   ########.fr       */
+/*   Updated: 2025/09/30 16:20:12 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,25 +78,31 @@ int	check_cub(t_game *game)
 {
 	int		fd;
 	char	*line;
+	char	*trimmed;
 
 	fd = open(game->map->filename, O_RDONLY);
-	if (fd < 0)
-		return (error_exit(perror, game));
+	if (fd == -1)
+		return (error_exit("Open file failed", game), -1);
 	line = get_next_line(fd);
 	while (fd > 0)
 	{
+		trimmed = ft_strtrim(line, "\n");
+		free(line);
 		if (game->map->in_map)
 		{
 			if (check_gstruct(game->graphics))
 				// controlla se manca qualche info grafica
 				check_map();
 			else
-				return (error_exit("File .cub not valid", game));
+				return (error_exit("File .cub not valid", game), -1);
 		}
 		else // non stiamo nella mappa
 		{
-			if (!parse_textures(line, game->graphics))
+			if (parse_textures(trimmed, game->graphics) < 0)
+				return (error_exit("File .cub not valid", game), -1);	
 		}
+		free(trimmed);
+		line = get_next_line(fd);
 	}
 	close(fd);
 }
