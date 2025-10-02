@@ -7,3 +7,4 @@ parsing file cub :
 FUNZIONI EXIT :
 
 manca free floor e ceiling
+

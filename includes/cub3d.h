@@ -66,6 +66,7 @@ void			init_map_defaults(t_map *map);
 t_game			*init_game(t_game *game);
 void			error_exit(char *msg, t_game *game);
 void			free_map(t_map *map);
-char	*check_line(char *line);
+char			*check_line(char *line);
+int				check_path(char *line);
 
 #endif
