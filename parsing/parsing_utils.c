@@ -6,7 +6,7 @@
 /*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 15:44:32 by skayed            #+#    #+#             */
-/*   Updated: 2025/10/02 15:43:00 by skayed           ###   ########.fr       */
+/*   Updated: 2025/10/13 15:41:41 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,7 @@ char	*check_line(char *line)
 	return (line);
 }
 
-int	check_path(char *line)
-	// controlla se l'estensione e' giusta e se e' possibile aprirle il file grafico
+int	check_path(char *line)// controlla se l'estensione e' giusta e se e' possibile aprirle il file grafico
 {
 	int len;
 	int fd;
