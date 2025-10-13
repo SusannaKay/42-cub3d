@@ -6,7 +6,7 @@
 /*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 14:25:17 by skayed            #+#    #+#             */
-/*   Updated: 2025/10/02 15:06:10 by skayed           ###   ########.fr       */
+/*   Updated: 2025/10/13 14:54:36 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ int	check_cub(t_game *game)
 	char	*line;
 	char	*trimmed;
 	int		text_ok;
+	int i;
 
 	fd = open(game->map->filename, O_RDONLY);
 	if (fd == -1)
@@ -109,9 +110,9 @@ int	check_cub(t_game *game)
 		}
 		else // non stiamo nella mappa
 		{
-			while (*trimmed == ' ' || *trimmed == '\t')
-				trimmed++;
-			text_ok = parse_textures(trimmed, game->graphics);
+			while (trimmed[i] == ' ' || trimmed[i] == '\t')
+				i++;
+			text_ok = parse_textures(*(trimmed + i), game->graphics);
 			if ( text_ok < 0)
 			{
 				free(trimmed);
