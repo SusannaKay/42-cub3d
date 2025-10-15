@@ -6,7 +6,7 @@
 /*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 15:44:32 by skayed            #+#    #+#             */
-/*   Updated: 2025/10/13 15:41:41 by skayed           ###   ########.fr       */
+/*   Updated: 2025/10/15 12:52:21 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,11 @@ char	*clean_line(char *s)
 	if (!res)
 		return (NULL);
 	return (res);
+}
+
+void ft_close(char *msg, , char *line, int fd, t_game *game)
+{
+	free(line);
+	close(fd);
+	error_exit(msg, game);
 }

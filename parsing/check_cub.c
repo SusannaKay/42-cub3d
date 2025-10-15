@@ -6,30 +6,12 @@
 /*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 14:25:17 by skayed            #+#    #+#             */
-/*   Updated: 2025/10/13 16:00:56 by skayed           ###   ########.fr       */
+/*   Updated: 2025/10/15 12:56:01 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-// apri file
-// NON SI APRE : file does not exist -> perror
-// SI APRE :
-//GETNEXTLINE FINO A 0
-// E' IN MAP
-// CHECK TEXTURE E COLORI
-// NON CI SONO --> Error
-// CI SONO CHECK MAPPA
-
-// NON E' IN MAP
-// CHECK PER OGNI TEXTURE
-// ESISTE GIA'? --> Error
-// NON ESISTE --> ADD
-// CHECK FLOOR E CEILING
-// ESISTE GIA? --> Error
-// CHECK VALORI TRA 0 E 255
-// CHECK 3 VALORI
-// AGGIUNGI AD ARRAY
 static int	check_gstruct(t_graphics *graphics)
 // controlla se manca qualche info grafica
 {
@@ -42,8 +24,14 @@ static int	check_gstruct(t_graphics *graphics)
 			return (-1);
 		i++;
 	}
-	// manca check floor e ceiling
-	return (0);
+	i = 0;
+	while (i < 3)
+	{
+		if (graphics->floor[i] == -1 || graphics->ceiling[i] == -1)
+			return (-1);
+		i++;
+	}
+	return (1);
 }
 
 static int	parse_textures(char *line, t_graphics *graphics)
@@ -52,9 +40,6 @@ static int	parse_textures(char *line, t_graphics *graphics)
 	char	*refined;
 
 	i = 0;
-	line = check_line(line);
-	if (!line)
-		return (0);
 	while (i < TEX_COUNT)
 	{
 		if (!ft_strncmp(line, graphics->flags[i], 2))
@@ -69,8 +54,7 @@ static int	parse_textures(char *line, t_graphics *graphics)
 			refined = clean_line(line);
 			if (!refined)
 				return (-1);
-			if (check_path(refined))
-				// se file ha estensione giusta e se si riesce ad aprire
+			if (check_path(refined)) // se file ha estensione giusta e se si riesce ad aprire
 				graphics->paths[i] = refined;
 			else
 				return (-1);
@@ -86,7 +70,6 @@ int	check_cub(t_game *game)
 	int		fd;
 	char	*line;
 	char	*trimmed;
-	int		text_ok;
 	int		i;
 
 	fd = open(game->map->filename, O_RDONLY);
@@ -95,56 +78,50 @@ int	check_cub(t_game *game)
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
-		trimmed = ft_strtrim(line, "\n"); // manca trim spazi
+		trimmed = ft_strtrim(line, "\n"); // trim e salta righe con solo \n
 		free(line);
 		line = clean_line(trimmed);
 		free(trimmed);
-		while (i < TEX_COUNT) // controllo se line contiene texture
+		if (!line || *line == '\0')
 		{
-			if (!ft_strncmp(line, graphics->flags[i], 2))
-				parse_textures(line);
-			i++;
+			free(line);
+			line = get_next_line(fd);
+			continue ;
 		}
-		if (!ft_strncmp(line, 'F', 1) || !ft_strncmp(line, 'C', 1))
-			parse_rgb(line);
-		if ()
-		// if (game->map->in_map)
-		// {
-		// 	if (!check_gstruct(game->graphics))
-		// 	// controlla se manca qualche info grafica
-		// 		check_map();
-		// 	else
-		// 	{
-		// 		free(trimmed);
-		// 		close(fd);
-		// 		return (error_exit("File .cub not valid", game), -1);
-		// 	}
-		// }
-		// else // non stiamo nella mappa
-		// {
-		// 	while (trimmed[i] == ' ' || trimmed[i] == '\t')
-		// 		i++;
-		// 	text_ok = parse_textures(*(trimmed + i), game->graphics);
-		// 	if ( text_ok < 0)
-		// 	{
-		// 		free(trimmed);
-		// 		close(fd);
-		// 		return (error_exit("File .cub not valid", game), -1);
-		// 	}
-		// 	else if (text_ok == 0 )
-		// 	{
-		// 		parse_rgb();
-		// 	}
-		// }
-		free(line);
+		if (!game->map->in_map && trimmed)
+		{
+			line = clean_line(trimmed);
+			free(trimmed);
+			i = 0;
+			while (i < TEX_COUNT) // controllo se line contiene texture
+			{
+				if (!ft_strncmp(line, game->graphics->flags[i], 2))
+					if (parse_textures(line, game->graphics) < 0)
+						return (ft_close("Textures not valid", line, fd, game),
+								-1);
+				i++;
+			}
+			if (!ft_strncmp(line, "F", 1) || !ft_strncmp(line, "C", 1))
+				if (parse_rgb(line, game) < 0)
+					return (ft_close("RGB not valid", line, fd, game), -1);
+			free(line);
+		}
+		else if (game->map->in_map && trimmed) // siamo nella mappa
+		{
+			if (check_gstruct(game->graphics))
+				// controlla se manca qualche info grafica
+				if (check_map(trimmed, game) < 0)
+					return (ft_close("Map not valid", trimmed, fd, game),
+							-1);
+				else
+					return (ft_close("File .cub not valid", trimmed, fd, game),
+							-1);
+		}
+		else
+			return (ft_close("File .cub not valid", trimmed, fd, game), -1);
+		free(trimmed);
 		line = get_next_line(fd);
 	}
 	close(fd);
 	return (0);
 }
-
-if (!check_graphics(line))
-	while (line[i])
-	{
-		se trovi 0, 1 ecc in map break else i++;
-	}

@@ -6,8 +6,8 @@
 - [✅] Leggere il file con `get_next_line`, normalizzare le righe (trim destro) e saltare righe vuote finché non servono.
 - [✅] Implementare `parse_textures` per riconoscere `NO/SO/WE/EA`, salvare path senza spazi iniziali e bloccare i duplicati.
 - [✅] Verificare che i file delle texture siano accessibili (`open`/`close`) prima di salvarli.
-- [ ] Implementare un helper `parse_rgb` che splitta `F` e `C` su `,`, converte in int e valida range 0-255.
-- [ ] Assicurare che `graphics->floor` e `graphics->ceiling` vengano valorizzati una sola volta e segnalare errori di duplicati.
+- [✅] Implementare un helper `parse_rgb` che splitta `F` e `C` su `,`, converte in int e valida range 0-255.
+- [✅] Assicurare che `graphics->floor` e `graphics->ceiling` vengano valorizzati una sola volta e segnalare errori di duplicati.
 - [ ] Quando compare una riga di mappa, impostare `map->in_map` e salvare tutte le righe successive (inclusi spazi) in `map->map`.
 - [ ] Aggiornare `map->width` e `map->height`, normalizzando le righe più corte con spazi per ottenere una matrice rettangolare.
 - [ ] Controllare che ogni riga della mappa contenga solo caratteri validi (`0`, `1`, `N`, `S`, `E`, `W` e spazi).
