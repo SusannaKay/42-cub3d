@@ -6,7 +6,7 @@
 /*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 15:44:32 by skayed            #+#    #+#             */
-/*   Updated: 2025/10/15 13:39:57 by skayed           ###   ########.fr       */
+/*   Updated: 2025/10/15 15:18:49 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ void map_line(char *line, t_game *game)
 		line++;
 	if (*line == '\0')
 		return (0);
-	if (*line == '1' || *line == '0')
+	if (*line == '1' || *line == '0' || *line == 'N' || *line == 'S'
+		|| *line == 'E' || *line == 'W')
 	{
 		game->map->in_map = 1;
 		return (1);

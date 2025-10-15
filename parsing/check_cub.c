@@ -6,7 +6,7 @@
 /*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 14:25:17 by skayed            #+#    #+#             */
-/*   Updated: 2025/10/15 13:45:11 by skayed           ###   ########.fr       */
+/*   Updated: 2025/10/15 15:18:04 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	check_cub(t_game *game)
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
-		if (map_line(line, game))
+		if (map_line(line, game)) // se line fa parte della mappa ( contiene 1 o 0 )imposta in_map
 		{
 			if (check_gstruct(game->graphics)) // controlla se manca qualche info grafica
 				if (check_map(line, game) < 0)
