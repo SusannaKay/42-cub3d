@@ -6,7 +6,7 @@
 /*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 15:44:32 by skayed            #+#    #+#             */
-/*   Updated: 2025/10/15 12:52:21 by skayed           ###   ########.fr       */
+/*   Updated: 2025/10/15 13:39:57 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,21 +21,7 @@ char	*check_line(char *line)
 	return (line);
 }
 
-int	check_path(char *line)// controlla se l'estensione e' giusta e se e' possibile aprirle il file grafico
-{
-	int len;
-	int fd;
 
-	len = ft_strlen(line) - 4;
-	if (!ft_strncmp(line + len, ".xpm", 4))
-	{
-		fd = open(line, O_RDONLY);
-		if (fd < 0)
-			return (-1);
-		close(fd);
-	}
-	return (0);
-}
 
 char	*clean_line(char *s)
 {
@@ -62,4 +48,18 @@ void ft_close(char *msg, , char *line, int fd, t_game *game)
 	free(line);
 	close(fd);
 	error_exit(msg, game);
+}
+
+void map_line(char *line, t_game *game)
+{
+	while (*line && (*line == ' ' || *line == '\t'))
+		line++;
+	if (*line == '\0')
+		return (0);
+	if (*line == '1' || *line == '0')
+	{
+		game->map->in_map = 1;
+		return (1);
+	}
+	return(0);
 }
