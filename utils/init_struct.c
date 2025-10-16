@@ -6,7 +6,7 @@
 /*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 15:23:31 by skayed            #+#    #+#             */
-/*   Updated: 2025/09/24 17:08:32 by skayed           ###   ########.fr       */
+/*   Updated: 2025/10/16 15:04:07 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,6 @@ void	init_map_defaults(t_map *map)
 	map->in_map = 0;
 	map->height = 0;
 	map->width = 0;
-	map->p_x = -1;
-	map->p_y = -1;
-	map->p_dir = '\0';
 }
 
 t_game	*init_game(t_game *game)

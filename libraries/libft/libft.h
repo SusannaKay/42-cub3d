@@ -6,10 +6,11 @@
 /*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 17:49:38 by skayed            #+#    #+#             */
-/*   Updated: 2025/10/16 14:29:16 by skayed           ###   ########.fr       */
+/*   Updated: 2025/10/16 14:55:17 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef LIBFT_H
 #define LIBFT_H
 #include <stddef.h>
 #include <stdlib.h>

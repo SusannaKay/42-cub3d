@@ -3,7 +3,7 @@ NAME = libft.a
 
 CC = cc
 RM = rm -f
-CFLAGS = -Wall -Wextra -Werror 
+CFLAGS = -Wall -Wextra -Werror -fPIE
 
 SRCS = ft_isascii.c ft_memcpy.c ft_strlcat.c ft_strrchr.c ft_atoi.c\
 ft_isdigit.c ft_memmove.c ft_strlcpy.c ft_tolower.c ft_bzero.c\

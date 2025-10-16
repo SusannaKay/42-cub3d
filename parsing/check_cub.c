@@ -6,33 +6,11 @@
 /*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 14:25:17 by skayed            #+#    #+#             */
-/*   Updated: 2025/10/15 15:18:04 by skayed           ###   ########.fr       */
+/*   Updated: 2025/10/16 15:02:13 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
-
-static int	check_gstruct(t_graphics *graphics)
-// controlla se manca qualche info grafica
-{
-	int i;
-
-	i = 0;
-	while (i < TEX_COUNT)
-	{
-		if (!graphics->paths[i] || graphics->paths[i] == NULL)
-			return (-1);
-		i++;
-	}
-	i = 0;
-	while (i < 3)
-	{
-		if (graphics->floor[i] == -1 || graphics->ceiling[i] == -1)
-			return (-1);
-		i++;
-	}
-	return (1);
-}
 
 int	check_cub(t_game *game)
 {
@@ -47,19 +25,17 @@ int	check_cub(t_game *game)
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
-		if (map_line(line, game)) // se line fa parte della mappa ( contiene 1 o 0 )imposta in_map
+		if (map_line(line, game) && check_gstruct(game->graphics)) // se line fa parte della mappa ( contiene 1 o 0 )imposta in_map
 		{
-			if (check_gstruct(game->graphics)) // controlla se manca qualche info grafica
-				if (check_map(line, game) < 0)
-					return (ft_close("Map not valid", line, fd, game),
-							-1);
-			else
-				return (ft_close("File .cub not valid", line, fd, game),
-							-1);
+			if (save_map(line, game) < 0) // salva la riga nella matrice map
+				return (ft_close("Map not valid", line, fd, game), -1);
 			free(line);
 			line = get_next_line(fd);
 			continue ;
 		}
+		else
+			return (ft_close("File .cub not valid", line, fd, game),
+					-1);
 		tmp = clean_line(ft_strtrim(line, "\n"));
 		free(line);
 		if (!tmp || *tmp == '\0')
@@ -78,7 +54,7 @@ int	check_cub(t_game *game)
 		}
 		if (!ft_strncmp(tmp, "F", 1) || !ft_strncmp(tmp, "C", 1))
 			if (parse_rgb(tmp, game) < 0)
-				return (ft_close("RGB not valid", trimmed, fd, game), -1);
+				return (ft_close("RGB not valid", tmp, fd, game), -1);
 		free(tmp);
 		line = get_next_line(fd);
 	}

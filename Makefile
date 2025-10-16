@@ -6,7 +6,7 @@
 #    By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/22 10:14:02 by skayed            #+#    #+#              #
-#    Updated: 2025/10/15 13:38:50 by skayed           ###   ########.fr        #
+#    Updated: 2025/10/16 15:12:04 by skayed           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ SRC = main.c \
 	parsing/parsing_utils.c \
 	parsing/parse_texture.c \
 	parsing/parse_rgb.c \
+	parsing/parse_map.c \
 	utils/init_struct.c \
 	utils/exit.c 
 OBJ = $(SRC: .c=.o)

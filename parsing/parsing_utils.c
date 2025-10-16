@@ -6,7 +6,7 @@
 /*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 15:44:32 by skayed            #+#    #+#             */
-/*   Updated: 2025/10/15 15:18:49 by skayed           ###   ########.fr       */
+/*   Updated: 2025/10/16 15:06:30 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,11 @@ char	*check_line(char *line)
 	return (line);
 }
 
-
-
 char	*clean_line(char *s)
 {
-	int start;
-	int end;
-	char *res;
+	int		start;
+	int		end;
+	char	*res;
 
 	if (!s)
 		return (NULL);
@@ -43,14 +41,14 @@ char	*clean_line(char *s)
 	return (res);
 }
 
-void ft_close(char *msg, , char *line, int fd, t_game *game)
+void	ft_close(char *msg, char *line, int fd, t_game *game)
 {
 	free(line);
 	close(fd);
 	error_exit(msg, game);
 }
 
-void map_line(char *line, t_game *game)
+int	map_line(char *line, t_game *game)
 {
 	while (*line && (*line == ' ' || *line == '\t'))
 		line++;
@@ -59,8 +57,31 @@ void map_line(char *line, t_game *game)
 	if (*line == '1' || *line == '0' || *line == 'N' || *line == 'S'
 		|| *line == 'E' || *line == 'W')
 	{
-		game->map->in_map = 1;
+		if (game)
+			game->map->in_map = 1;
 		return (1);
 	}
-	return(0);
+	return (0);
+}
+
+int	check_gstruct(t_graphics *graphics)
+// controlla se manca qualche info grafica
+{
+	int i;
+
+	i = 0;
+	while (i < TEX_COUNT)
+	{
+		if (!graphics->paths[i] || graphics->paths[i] == NULL)
+			return (-1);
+		i++;
+	}
+	i = 0;
+	while (i < 3)
+	{
+		if (graphics->floor[i] == -1 || graphics->ceiling[i] == -1)
+			return (-1);
+		i++;
+	}
+	return (1);
 }

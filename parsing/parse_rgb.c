@@ -6,7 +6,7 @@
 /*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 14:52:40 by skayed            #+#    #+#             */
-/*   Updated: 2025/10/15 12:58:10 by skayed           ###   ########.fr       */
+/*   Updated: 2025/10/16 15:10:19 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	parse_rgb(char *line, t_game *game)
 	char	**matrix;
 	int		i;
 	int		num;
-	int		rgb[3];
+	int		*rgb;
 
 	if (*line == 'F')
 		rgb = game->graphics->floor;

@@ -6,7 +6,7 @@
 /*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 13:57:26 by skayed            #+#    #+#             */
-/*   Updated: 2025/09/29 14:18:24 by skayed           ###   ########.fr       */
+/*   Updated: 2025/10/16 15:17:12 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	free_graphics(t_graphics *graphics, void *mlx)
 			if (graphics->wall_img[i])
 				mlx_destroy_image(mlx, graphics->wall_img[i]);
 			if (graphics->flags[i])
-				free(graphics->flags[i]);
+				free((void *)graphics->flags[i]);
 			if (graphics->paths[i])
 				free(graphics->paths[i]);
 			i++;
@@ -67,7 +67,7 @@ static void	free_all(t_game *game)
 		mlx_loop_end(game->mlx);
 	if (game->win)
 	{
-		mlx_destroy_destroy_window(game->mlx, game->win);
+		mlx_destroy_window(game->mlx, game->win);
 		game->win = NULL;
 	}
 	if (game->mlx)
@@ -86,4 +86,20 @@ void	error_exit(char *msg, t_game *game)
 	if (msg)
 		ft_printf("Error:\n%s", msg);
 	exit(EXIT_FAILURE);
+}
+
+void	free_matrix(char **matrix)
+{
+	int	i;
+
+	if (!matrix)
+		return ;
+	i = 0;
+	while (matrix[i])
+	{
+		free(matrix[i]);
+		matrix[i] = NULL;
+		i++;
+	}
+	free(matrix);
 }
