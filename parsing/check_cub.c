@@ -6,18 +6,55 @@
 /*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 14:25:17 by skayed            #+#    #+#             */
-/*   Updated: 2025/10/16 15:02:13 by skayed           ###   ########.fr       */
+/*   Updated: 2025/10/17 14:35:30 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
+
+static int	handle_map_line(char **line, t_game *game, int fd) // passo puntatore alla linea per liberare la memoria e non lavorare su una copia 
+{
+	if (!map_line(*line, game))
+		return (0);
+	if (check_gstruct(game->graphics) != 1)
+		return (ft_close("Missing textures/colors before map", *line, fd, game), -1);
+	if (save_map(*line, game) < 0)
+		return (ft_close("Map not valid", *line, fd, game), -1);
+	free(*line);
+	*line = get_next_line(fd);
+	return (1);
+}
+
+static int	handle_config_line(char *line, t_game *game, int fd)
+{
+	int	i;
+
+	i = 0;
+	while (i < TEX_COUNT)
+	{
+		if (!ft_strncmp(line, game->graphics->flags[i], 2))
+		{
+			if (parse_textures(line, game->graphics) < 0)
+				return (ft_close("Textures not valid", line, fd, game), -1);
+			return (1);
+		}
+		i++;
+	}
+	if (!ft_strncmp(line, "F", 1) || !ft_strncmp(line, "C", 1))
+	{
+		if (parse_rgb(line, game) < 0)
+			return (ft_close("RGB not valid", line, fd, game), -1);
+		return (1);
+	}
+	return (0);
+}
 
 int	check_cub(t_game *game)
 {
 	int		fd;
 	char	*line;
 	char	*tmp;
-	int		i;
+	int		status;
 
 	fd = open(game->map->filename, O_RDONLY);
 	if (fd == -1)
@@ -25,37 +62,24 @@ int	check_cub(t_game *game)
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
-		if (map_line(line, game) && check_gstruct(game->graphics)) // se line fa parte della mappa ( contiene 1 o 0 )imposta in_map
+		status = handle_map_line(&line, game, fd);
+		if (status < 0)
+			return (-1);
+		if (status > 0)
+			continue;
+		tmp = ft_strtrim(line, "\n");
+		free(line);
+		line = clean_line(tmp);
+		free(tmp);
+		if (!line || *line == '\0')
 		{
-			if (save_map(line, game) < 0) // salva la riga nella matrice map
-				return (ft_close("Map not valid", line, fd, game), -1);
 			free(line);
 			line = get_next_line(fd);
 			continue ;
 		}
-		else
-			return (ft_close("File .cub not valid", line, fd, game),
-					-1);
-		tmp = clean_line(ft_strtrim(line, "\n"));
+		if (handle_config_line(line, game, fd) <= 0)
+			return (ft_close("Unexpected configuration line", line, fd, game), -1);
 		free(line);
-		if (!tmp || *tmp == '\0')
-		{
-			free(tmp);
-			line = get_next_line(fd);
-			continue ;
-		}
-		i = 0;
-		while (i < TEX_COUNT) // controllo se line contiene texture
-		{
-			if (!ft_strncmp(tmp, game->graphics->flags[i], 2))
-				if (parse_textures(tmp, game->graphics) < 0)
-					return (ft_close("Textures not valid", tmp, fd, game), -1);
-			i++;
-		}
-		if (!ft_strncmp(tmp, "F", 1) || !ft_strncmp(tmp, "C", 1))
-			if (parse_rgb(tmp, game) < 0)
-				return (ft_close("RGB not valid", tmp, fd, game), -1);
-		free(tmp);
 		line = get_next_line(fd);
 	}
 	return (close(fd), 0);
