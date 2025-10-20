@@ -6,7 +6,7 @@
 /*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 13:45:36 by skayed            #+#    #+#             */
-/*   Updated: 2025/10/20 18:24:14 by skayed           ###   ########.fr       */
+/*   Updated: 2025/10/20 18:40:56 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ int	save_map(char *line, t_game *game)
 		return (0);
 	i = 0;
 	i = find_last_row(game->map->map);
+	if (i == -1)
+		i = 0;
 	printf("Current map has %d rows. Preparing to add new row.\n", i);
 	new_map = (char **)malloc(sizeof(char *) * (i + 2));
 	printf("Allocated memory for %d rows.\n", (i + 2));
@@ -55,7 +57,8 @@ int	save_map(char *line, t_game *game)
 		return (error_exit("Malloc failed", game), -1);
 	}
 	new_map[rows + 1] = NULL;
-	free(game->map->map);
+	if (game->map->map)
+		free(game->map->map);
 	game->map->map = new_map;
 	return (1);
 }

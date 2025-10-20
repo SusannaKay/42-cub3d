@@ -6,7 +6,7 @@
 /*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 12:22:27 by skayed            #+#    #+#             */
-/*   Updated: 2025/10/20 16:06:30 by skayed           ###   ########.fr       */
+/*   Updated: 2025/10/20 18:32:19 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,17 @@ void	init_graphics(t_graphics *graphics)
 	graphics->ceiling[1] = -1;
 	graphics->ceiling[2] = -1;
 }
+
+void print_map(char **map)
+{
+	int i = 0;
+	printf("Current map state:\n");
+	while (map && map[i])
+	{
+		printf("Row %d: %s\n", i, map[i]);
+		i++;
+	}
+}
 int	main(int argc, char **argv)
 {
 	t_game	*game;
@@ -40,6 +51,7 @@ int	main(int argc, char **argv)
 		printf("filename : %s\n", game->map->filename);
 		printf("check cub\n");
 		check_cub(game);
+		print_map(game->map->map);
 		//mlx_loop(mlx->mlx);
 		return (0);
 	}
