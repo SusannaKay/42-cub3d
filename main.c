@@ -6,12 +6,13 @@
 /*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 12:22:27 by skayed            #+#    #+#             */
-/*   Updated: 2025/10/16 15:06:16 by skayed           ###   ########.fr       */
+/*   Updated: 2025/10/20 16:06:30 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/cub3d.h"
-void init_graphics(t_graphics *graphics)
+
+void	init_graphics(t_graphics *graphics)
 {
 	graphics->flags[TEX_NO] = "NO";
 	graphics->flags[TEX_SO] = "SO";
@@ -26,27 +27,19 @@ void init_graphics(t_graphics *graphics)
 }
 int	main(int argc, char **argv)
 {
-	t_game *game;
+	t_game	*game;
 
 	if (argc == 2)
 	{
 		if (!ft_strnstr(argv[1], ".cub", ft_strlen(argv[1])))
-			return (error_exit("Map format should be *.cub", NULL), 1);
-		// check file e mappa passando puntatori alle struct che servono
-		// init grafico e init mlx
+			return (error_exit("Map format should be *.cub", NULL), -1);
+		printf("Starting game with map: %s\n", argv[1]);
 		game = ft_calloc(1, sizeof(t_game));
-		if (!game)
-			return(error_exit("perror", game), -1);
-		game->graphics = ft_calloc(1, sizeof(t_graphics));
-		if(!game->graphics)
-			return(error_exit("perror", game), -1);
-		init_graphics(game->graphics);
-		game->map = ft_calloc(1, sizeof(t_map));
-		if(!game->map)
-			return(error_exit("perror", game), -1);
+		game = init_game(&game);
 		game->map->filename = argv[1];
+		printf("filename : %s\n", game->map->filename);
+		printf("check cub\n");
 		check_cub(game);
-		init_game(game);
 		//mlx_loop(mlx->mlx);
 		return (0);
 	}

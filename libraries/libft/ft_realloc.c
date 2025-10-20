@@ -6,7 +6,7 @@
 /*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 14:24:44 by skayed            #+#    #+#             */
-/*   Updated: 2025/10/16 14:28:41 by skayed           ###   ########.fr       */
+/*   Updated: 2025/10/20 14:58:44 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 void	*ft_realloc(void *ptr, size_t size)
 {
-	void new_ptr;
+	void *new_ptr;
 
 	if (!ptr)
-		return (malloc(size))
+		return (malloc(size));
 	if ( size == 0)
 	{
 		free(ptr);

@@ -6,7 +6,7 @@
 /*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 13:57:26 by skayed            #+#    #+#             */
-/*   Updated: 2025/10/16 15:17:12 by skayed           ###   ########.fr       */
+/*   Updated: 2025/10/20 16:05:52 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ void	free_map(t_map *map)
 		map->map = NULL;
 	}
 	if (map->filename)
-		free(map->filename);
+		{free(map->filename);
+		map->filename = NULL;}
 	free(map);
 }
 

@@ -2,11 +2,9 @@
 # define CUB3D_H
 
 # include "../libraries/libft/libft.h"
-# ifndef CUB3D_TEST
 #  include "../libraries/mlx/mlx.h"
 #  include <X11/X.h>
 #  include <X11/keysym.h>
-# endif
 # include <fcntl.h>    // open, O_RDONLY, ecc.
 # include <math.h>     // funzioni matematiche (cos, sin, sqrt, ecc.)
 # include <stdio.h>    // printf, perror
@@ -64,9 +62,7 @@ typedef struct s_game
 }				t_game;
 
 int				check_cub(t_game *game);
-void			init_graphics_defaults(t_graphics *graphics);
-void			init_map_defaults(t_map *map);
-t_game			*init_game(t_game *game);
+t_game			*init_game(t_game **game);
 void			error_exit(char *msg, t_game *game);
 void			free_map(t_map *map);
 char			*check_line(char *line);

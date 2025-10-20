@@ -6,7 +6,7 @@
 /*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 15:44:32 by skayed            #+#    #+#             */
-/*   Updated: 2025/10/16 15:06:30 by skayed           ###   ########.fr       */
+/*   Updated: 2025/10/20 17:02:03 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,17 +50,26 @@ void	ft_close(char *msg, char *line, int fd, t_game *game)
 
 int	map_line(char *line, t_game *game)
 {
-	while (*line && (*line == ' ' || *line == '\t'))
-		line++;
-	if (*line == '\0')
+	int	i;
+
+	i = 0;
+	while (line[i] && (line[i] == ' ' || line[i] == '\t'))
+		i++;
+	if (line[i] == '\0')
 		return (0);
-	if (*line == '1' || *line == '0' || *line == 'N' || *line == 'S'
-		|| *line == 'E' || *line == 'W')
+	if (line[i] == '1' || line[i] == '0' || line[i] == 'N' || line[i] == 'S'
+		|| line[i] == 'E' || line[i] == 'W')
 	{
-		if (game)
-			game->map->in_map = 1;
-		return (1);
+		i++;
+		if (line[i] == '0' || line[i] == '1')
+		{
+			if (game->map->in_map == 0)
+				game->map->in_map = 1;
+			printf("Line is a valid map line: %s\n", line);
+			return (1);
+		}
 	}
+	printf("Line is not a valid map line: %s\n", line);
 	return (0);
 }
 

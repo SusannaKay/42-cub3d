@@ -6,7 +6,7 @@
 /*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 13:45:36 by skayed            #+#    #+#             */
-/*   Updated: 2025/10/16 14:53:10 by skayed           ###   ########.fr       */
+/*   Updated: 2025/10/20 17:01:12 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,12 @@ static int find_last_row(char **map)
 	int i = 0;
 
 	if (!map)
-		return -1;
+		return (-1);
+	printf("Finding last row of the map.\n");
 	while (map[i])
 		i++;
-	return i - 1;
+	
+	return (i - 1);
 }
 
 int	save_map(char *line, t_game *game)
@@ -28,17 +30,23 @@ int	save_map(char *line, t_game *game)
 	int		i;
 	char	**new_map;
 
+	
 	if (!line || *line == '\n')
 		return (0);
+	printf("Saving map line: %s\n", line);
 	if (map_line(line, NULL) == 0) // se non contiene caratteri mappa
 		return (-1);
 	i = 0;
+	printf("counting rows.\n");
 	i = find_last_row(game->map->map);
+	printf("Current map has %d rows. Preparing to add new row.\n", i + 1);
 	new_map = malloc(sizeof(char *) * (i + 2));
+	printf("Allocated memory for %d rows.\n", i + 2);
 	if (!new_map)
 		return (error_exit("Malloc failed", game), -1);
 	i = 0;
 	i = find_last_row(game->map->map);
+	printf("Current map has %d rows. Adding new row.\n", i + 1);
 	new_map[i] = ft_strdup(line);
 	if (!new_map[i])
 	{

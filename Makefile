@@ -6,7 +6,7 @@
 #    By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/22 10:14:02 by skayed            #+#    #+#              #
-#    Updated: 2025/10/17 13:34:18 by skayed           ###   ########.fr        #
+#    Updated: 2025/10/20 15:03:57 by skayed           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ SRC = main.c \
 	parsing/parse_map.c \
 	utils/init_struct.c \
 	utils/exit.c 
-OBJ = $(SRC: .c=.o)
+OBJ = $(SRC:.c=.o)
 
 all: $(NAME)
 

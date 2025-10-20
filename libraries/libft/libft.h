@@ -6,7 +6,7 @@
 /*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 17:49:38 by skayed            #+#    #+#             */
-/*   Updated: 2025/10/16 14:55:17 by skayed           ###   ########.fr       */
+/*   Updated: 2025/10/20 14:57:20 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,4 +71,5 @@ int					ft_printf(const char *str, ...);
 char				*get_next_line(int fd);
 char				*get_next_line_bonus(int fd);
 void				*ft_realloc(void *ptr, size_t size);
+
 #endif
