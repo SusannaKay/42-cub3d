@@ -2,9 +2,11 @@
 # define CUB3D_H
 
 # include "../libraries/libft/libft.h"
-# include "../libraries/mlx/mlx.h"
-# include <X11/X.h>
-# include <X11/keysym.h>
+# ifndef CUB3D_TEST
+#  include "../libraries/mlx/mlx.h"
+#  include <X11/X.h>
+#  include <X11/keysym.h>
+# endif
 # include <fcntl.h>    // open, O_RDONLY, ecc.
 # include <math.h>     // funzioni matematiche (cos, sin, sqrt, ecc.)
 # include <stdio.h>    // printf, perror

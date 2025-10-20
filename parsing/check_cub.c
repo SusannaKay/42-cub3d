@@ -6,7 +6,7 @@
 /*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 14:25:17 by skayed            #+#    #+#             */
-/*   Updated: 2025/10/17 14:35:30 by skayed           ###   ########.fr       */
+/*   Updated: 2025/10/17 15:04:41 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static int	handle_map_line(char **line, t_game *game, int fd) // passo puntatore
 {
 	if (!map_line(*line, game))
 		return (0);
-	if (check_gstruct(game->graphics) != 1)
+	if (check_gstruct(game->graphics) < 0)
 		return (ft_close("Missing textures/colors before map", *line, fd, game), -1);
 	if (save_map(*line, game) < 0)
 		return (ft_close("Map not valid", *line, fd, game), -1);

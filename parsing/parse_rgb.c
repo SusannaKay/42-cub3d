@@ -6,7 +6,7 @@
 /*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 14:52:40 by skayed            #+#    #+#             */
-/*   Updated: 2025/10/16 15:10:19 by skayed           ###   ########.fr       */
+/*   Updated: 2025/10/17 15:02:59 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	parse_rgb(char *line, t_game *game)
 		rgb[i] = num;
 		i++;
 	}
-	if (i >= 3 || matrix[i] != NULL) // check se ci sono piu di 3 numeri
+	if (i != 3 || matrix[i] != NULL) // check se ci sono piu di 3 numeri
 	{
 		free_matrix(matrix);
 		return (-1);
