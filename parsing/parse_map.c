@@ -6,12 +6,26 @@
 /*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 13:45:36 by skayed            #+#    #+#             */
-/*   Updated: 2025/10/21 14:06:08 by skayed           ###   ########.fr       */
+/*   Updated: 2025/10/21 15:26:01 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
+static int	check_char(char *line)
+{
+	int	i;
+
+	i = 0;
+	while (line[i])
+	{
+		if (!(line[i] == '1') || !(line[i] == '0') || !(line[i] == 'N') || !(line[i] == 'S')
+			|| !(line[i] == 'E') || !(line[i] == 'W') || !(line[i] == ' '))
+			return (0);
+		i++;
+	}
+	return (1);
+}
 static int	find_last_row(char **map)
 {
 	int	i;
@@ -19,7 +33,6 @@ static int	find_last_row(char **map)
 	i = 0;
 	if (!map)
 		return (0);
-	printf("Finding last row of the map.\n");
 	while (map[i])
 		i++;
 	return (i);
@@ -34,10 +47,10 @@ int	save_map(char *line, t_game *game)
 	rows = 0;
 	if (!line || *line == '\n')
 		return (0);
+	if (!check_char(line))
+		return (error_exit("Invalid character in map line", game), -1);
 	rows = find_last_row(game->map->map);
-	printf("Current map has %d rows. Preparing to add new row.\n", i);
 	new_map = (char **)malloc(sizeof(char *) * (rows + 2));
-	printf("Allocated memory for %d rows.\n", (rows + 2));
 	if (!new_map)
 		return (error_exit("Malloc failed", game), -1);
 	i = 0;
@@ -51,7 +64,6 @@ int	save_map(char *line, t_game *game)
 				free_matrix(new_map);
 				return (error_exit("Malloc failed", game), -1);
 			}
-			printf("Copied existing map row %d: %s\n", i, new_map[i]);
 			i++;
 		}
 	}
@@ -61,7 +73,6 @@ int	save_map(char *line, t_game *game)
 		free_matrix(new_map);
 		return (error_exit("Malloc failed", game), -1);
 	}
-	printf("Duplicated line into new map row: %s\n", new_map[rows]);
 	new_map[i + 1] = NULL;
 	if (game->map->map)
 		free_matrix(game->map->map);

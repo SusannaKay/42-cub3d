@@ -6,5 +6,6 @@ parsing file cub :
 
 FUNZIONI EXIT :
 
-manca free floor e ceiling
+rimettere mlx su free graphics
 
+rimettere if lag su makefile

@@ -6,13 +6,13 @@
 #    By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/22 10:14:02 by skayed            #+#    #+#              #
-#    Updated: 2025/10/20 15:03:57 by skayed           ###   ########.fr        #
+#    Updated: 2025/10/21 15:46:14 by skayed           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3d
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -g -gdwarf-4 -O0 -I./include -Imlx
+CFLAGS = -g -gdwarf-4 -O0 -I./include -Imlx
 
 MINILIBX_PATH = libraries/mlx
 MINILIBX = $(MINILIBX_PATH)/libmlx.a
@@ -26,6 +26,7 @@ SRC = main.c \
 	parsing/parse_texture.c \
 	parsing/parse_rgb.c \
 	parsing/parse_map.c \
+	parsing/check_map.c \
 	utils/init_struct.c \
 	utils/exit.c 
 OBJ = $(SRC:.c=.o)

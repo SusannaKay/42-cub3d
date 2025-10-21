@@ -6,30 +6,15 @@
 /*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 12:22:27 by skayed            #+#    #+#             */
-/*   Updated: 2025/10/21 14:07:11 by skayed           ###   ########.fr       */
+/*   Updated: 2025/10/21 15:45:03 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/cub3d.h"
 
-void	init_graphics(t_graphics *graphics)
-{
-	graphics->flags[TEX_NO] = "NO";
-	graphics->flags[TEX_SO] = "SO";
-	graphics->flags[TEX_WE] = "WE";
-	graphics->flags[TEX_EA] = "EA";
-	graphics->floor[0] = -1;
-	graphics->floor[1] = -1;
-	graphics->floor[2] = -1;
-	graphics->ceiling[0] = -1;
-	graphics->ceiling[1] = -1;
-	graphics->ceiling[2] = -1;
-}
-
 void print_map(char **map)
 {
 	int i = 0;
-	printf("Current map state:\n");
 	while (map && map[i])
 	{
 		printf("%s\n", map[i]);
@@ -44,13 +29,11 @@ int	main(int argc, char **argv)
 	{
 		if (!ft_strnstr(argv[1], ".cub", ft_strlen(argv[1])))
 			return (error_exit("Map format should be *.cub", NULL), -1);
-		printf("Starting game with map: %s\n", argv[1]);
 		game = ft_calloc(1, sizeof(t_game));
 		game = init_game(&game);
 		game->map->filename = argv[1];
-		printf("filename : %s\n", game->map->filename);
-		printf("check cub\n");
 		check_cub(game);
+		verify_map(game);
 		print_map(game->map->map);
 		
 		//mlx_loop(mlx->mlx);

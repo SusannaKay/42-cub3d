@@ -6,7 +6,7 @@
 /*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 15:23:31 by skayed            #+#    #+#             */
-/*   Updated: 2025/10/20 16:07:31 by skayed           ###   ########.fr       */
+/*   Updated: 2025/10/21 15:45:23 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,16 +34,16 @@ static void	init_map_defaults(t_map *map)
 		return ;
 	map->map = NULL;
 	map->in_map = 0;
-	map->height = 0;
-	map->width = 0;
+	map->p_counter = 0;
+	map->p_x = -1;
+	map->p_y = -1;
+	map->p_dir = '\0';
 }
 
 t_game	*init_game(t_game **game)
 {
-	printf("Allocating game struct\n");
 	(*game)->mlx = NULL;
 	(*game)->win = NULL;
-	printf("Allocating graphics struct\n");
 	(*game)->graphics = ft_calloc(1, sizeof(t_graphics));
 	if (!(*game)->graphics)
 		return (error_exit("Malloc failed", (*game)), NULL);
@@ -51,12 +51,7 @@ t_game	*init_game(t_game **game)
 	(*game)->map = ft_calloc(1, sizeof(t_map));
 	if (!(*game)->map)
 		return (error_exit("Malloc failed", (*game)), NULL);
-	printf("Allocating map struct\n");
 	init_map_defaults((*game)->map);
-	printf("Allocating player struct\n");
-	(*game)->player = ft_calloc(1, sizeof(t_player));
-	if (!(*game)->player)
-		return (error_exit("Malloc failed", (*game)), NULL);
 	//game->mlx = mlx_init();
 	// if (!game->mlx)
 	// 	return (error_exit("mlx_init failed", game), NULL);

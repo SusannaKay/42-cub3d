@@ -2,9 +2,9 @@
 # define CUB3D_H
 
 # include "../libraries/libft/libft.h"
-#  include "../libraries/mlx/mlx.h"
-#  include <X11/X.h>
-#  include <X11/keysym.h>
+# include "../libraries/mlx/mlx.h"
+# include <X11/X.h>
+# include <X11/keysym.h>
 # include <fcntl.h>    // open, O_RDONLY, ecc.
 # include <math.h>     // funzioni matematiche (cos, sin, sqrt, ecc.)
 # include <stdio.h>    // printf, perror
@@ -32,8 +32,10 @@ typedef struct s_map
 	char		**map;
 	char		*filename;
 	int			in_map;
-	int			height;
-	int			width;
+	int			p_counter;
+	int			p_x;
+	int			p_y;
+	char		p_dir;
 }				t_map;
 
 typedef struct s_graphics
@@ -45,18 +47,10 @@ typedef struct s_graphics
 	int			ceiling[3];
 }				t_graphics;
 
-typedef struct s_player
-{
-	int			p_x;
-	int			p_y;
-	char		p_dir;
-}				t_player;
-
 typedef struct s_game
 {
 	t_map		*map;
 	t_graphics	*graphics;
-	t_player	*player;
 	void		*mlx;
 	void		*win;
 }				t_game;
@@ -73,5 +67,6 @@ int				check_gstruct(t_graphics *graphics);
 int				save_map(char *line, t_game *game);
 int				map_line(char *line, t_game *game);
 char			*clean_line(char *s);
-void	free_matrix(char **matrix);
+void			free_matrix(char **matrix);
+void	verify_map(t_game *game);
 #endif

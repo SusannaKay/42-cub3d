@@ -6,7 +6,7 @@
 /*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 15:44:32 by skayed            #+#    #+#             */
-/*   Updated: 2025/10/20 17:02:03 by skayed           ###   ########.fr       */
+/*   Updated: 2025/10/21 14:12:12 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,9 @@ int	map_line(char *line, t_game *game)
 		{
 			if (game->map->in_map == 0)
 				game->map->in_map = 1;
-			printf("Line is a valid map line: %s\n", line);
 			return (1);
 		}
 	}
-	printf("Line is not a valid map line: %s\n", line);
 	return (0);
 }
 

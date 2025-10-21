@@ -6,7 +6,7 @@
 /*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 13:57:26 by skayed            #+#    #+#             */
-/*   Updated: 2025/10/20 16:05:52 by skayed           ###   ########.fr       */
+/*   Updated: 2025/10/21 15:15:44 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,13 @@ void	free_map(t_map *map)
 		free(map->map);
 		map->map = NULL;
 	}
-	if (map->filename)
-		{free(map->filename);
-		map->filename = NULL;}
+	// if (map->filename)
+	// 	{free(map->filename);
+	// 	map->filename = NULL;}
 	free(map);
 }
 
-void	free_graphics(t_graphics *graphics, void *mlx)
+void	free_graphics(t_graphics *graphics)
 {
 	int	i;
 
@@ -45,8 +45,8 @@ void	free_graphics(t_graphics *graphics, void *mlx)
 	{
 		while (i < TEX_COUNT)
 		{
-			if (graphics->wall_img[i])
-				mlx_destroy_image(mlx, graphics->wall_img[i]);
+			// if (graphics->wall_img[i])
+			// 	mlx_destroy_image(mlx, graphics->wall_img[i]);
 			if (graphics->flags[i])
 				free((void *)graphics->flags[i]);
 			if (graphics->paths[i])
@@ -63,27 +63,28 @@ static void	free_all(t_game *game)
 	if (game->map)
 		free_map(game->map);
 	if (game->graphics)
-		free_graphics(game->mlx, game->graphics);
-	if (game->mlx)
-		mlx_loop_end(game->mlx);
-	if (game->win)
-	{
-		mlx_destroy_window(game->mlx, game->win);
-		game->win = NULL;
-	}
-	if (game->mlx)
-	{
-		mlx_destroy_display(game->mlx);
-		free(game->mlx);
-		game->mlx = NULL;
-	}
+		free_graphics(game->graphics);
+	// if (game->mlx)
+	// 	mlx_loop_end(game->mlx);
+	// if (game->win)
+	// {
+	// 	mlx_destroy_window(game->mlx, game->win);
+	// 	game->win = NULL;
+	// }
+	// if (game->mlx)
+	// {
+	// 	mlx_destroy_display(game->mlx);
+	// 	free(game->mlx);
+	// 	game->mlx = NULL;
+	// }
 	free(game);
 }
 
 void	error_exit(char *msg, t_game *game)
 {
 	if (game)
-		free_all(game);
+		printf("Exiting game...\n");
+		//free_all(game);
 	if (msg)
 		ft_printf("Error:\n%s", msg);
 	exit(EXIT_FAILURE);
