@@ -6,7 +6,7 @@
 /*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 14:25:17 by skayed            #+#    #+#             */
-/*   Updated: 2025/10/21 14:13:35 by skayed           ###   ########.fr       */
+/*   Updated: 2025/10/21 19:14:27 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	check_cub(t_game *game)
 {
 	int		fd;
 	char	*line;
-	char	*tmp;
+	char	*trimmed;
 	int		status;
 
 	fd = open(game->map->filename, O_RDONLY);
@@ -64,15 +64,20 @@ int	check_cub(t_game *game)
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
+		trimmed = ft_strtrim(line, "\n");
+		free(line);
+		if (!trimmed)
+			return (error_exit("Malloc failed", game), -1);
+		line = trimmed;
 		status = handle_map_line(&line, game, fd);
 		if (status < 0)
 			return (-1);
 		if (status > 0)
 			continue ;
-		tmp = ft_strtrim(line, "\n");
+
+		trimmed = clean_line(line);
 		free(line);
-		line = clean_line(tmp);
-		free(tmp);
+		line = trimmed;
 		if (!line || *line == '\0')
 		{
 			free(line);

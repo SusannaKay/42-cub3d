@@ -6,7 +6,7 @@
 /*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 13:45:36 by skayed            #+#    #+#             */
-/*   Updated: 2025/10/21 15:26:01 by skayed           ###   ########.fr       */
+/*   Updated: 2025/10/21 19:00:38 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ static int	check_char(char *line)
 	i = 0;
 	while (line[i])
 	{
-		if (!(line[i] == '1') || !(line[i] == '0') || !(line[i] == 'N') || !(line[i] == 'S')
-			|| !(line[i] == 'E') || !(line[i] == 'W') || !(line[i] == ' '))
+		if (line[i] != '1' && line[i] != '0' && line[i] != 'N' && line[i] != 'S'
+			&& line[i] != 'E' && line[i] != 'W' && line[i] != ' ')
 			return (0);
 		i++;
 	}
@@ -45,7 +45,7 @@ int	save_map(char *line, t_game *game)
 	int		rows;
 
 	rows = 0;
-	if (!line || *line == '\n')
+	if (!line || *line == '\0')
 		return (0);
 	if (!check_char(line))
 		return (error_exit("Invalid character in map line", game), -1);

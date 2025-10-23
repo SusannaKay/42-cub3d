@@ -6,22 +6,13 @@
 /*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 15:44:32 by skayed            #+#    #+#             */
-/*   Updated: 2025/10/21 14:12:12 by skayed           ###   ########.fr       */
+/*   Updated: 2025/10/21 19:10:57 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-char	*check_line(char *line)
-{
-	if (*line == '\n')
-		return (NULL);
-	while (*line == ' ')
-		line++;
-	return (line);
-}
-
-char	*clean_line(char *s)
+char	*clean_line(char *s) // pulisce le spaziature e i tab iniziali e finali
 {
 	int		start;
 	int		end;

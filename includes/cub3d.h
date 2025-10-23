@@ -59,7 +59,6 @@ int				check_cub(t_game *game);
 t_game			*init_game(t_game **game);
 void			error_exit(char *msg, t_game *game);
 void			free_map(t_map *map);
-char			*check_line(char *line);
 void			ft_close(char *msg, char *line, int fd, t_game *game);
 int				parse_textures(char *line, t_graphics *graphics);
 int				parse_rgb(char *line, t_game *game);
