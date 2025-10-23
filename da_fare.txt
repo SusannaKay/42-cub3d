@@ -11,8 +11,8 @@
 - [✅] Quando compare una riga di mappa, impostare `map->in_map` e salvare tutte le righe successive (inclusi spazi) in `map->map`.
 - [?] Aggiornare `map->width` e `map->height`, normalizzando le righe più corte con spazi per ottenere una matrice rettangolare.
 - [✅] Controllare che ogni riga della mappa contenga solo caratteri validi (`0`, `1`, `N`, `S`, `E`, `W` e spazi).
-- [ ] Identificare posizione e direzione del player, trasferendo le coordinate in `t_player` e assicurandosi che ce ne sia uno solo.
-- [ ] Implementare il controllo di chiusura della mappa (nessun `0` esposto a spazi o fuori mappa).
+- [✅] Identificare posizione e direzione del player, trasferendo le coordinate in `t_player` e assicurandosi che ce ne sia uno solo.
+- [✅] Implementare il controllo di chiusura della mappa (nessun `0` esposto a spazi o fuori mappa).
 - [ ] Gestire gli errori liberando le risorse e stampando `Error\n<msg>` tramite `error_exit`.
 
 
