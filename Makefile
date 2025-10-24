@@ -6,13 +6,13 @@
 #    By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/22 10:14:02 by skayed            #+#    #+#              #
-#    Updated: 2025/10/21 15:46:14 by skayed           ###   ########.fr        #
+#    Updated: 2025/10/23 16:53:22 by skayed           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3d
 CC = gcc
-CFLAGS = -g -gdwarf-4 -O0 -I./include -Imlx
+CFLAGS = -g -gdwarf-4 -O0 -I./include -Imlx 
 
 MINILIBX_PATH = libraries/mlx
 MINILIBX = $(MINILIBX_PATH)/libmlx.a
