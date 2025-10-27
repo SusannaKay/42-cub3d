@@ -6,7 +6,7 @@
 /*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 15:23:31 by skayed            #+#    #+#             */
-/*   Updated: 2025/10/21 15:45:23 by skayed           ###   ########.fr       */
+/*   Updated: 2025/10/27 15:55:24 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,11 @@ t_game	*init_game(t_game **game)
 	if (!(*game)->map)
 		return (error_exit("Malloc failed", (*game)), NULL);
 	init_map_defaults((*game)->map);
-	//game->mlx = mlx_init();
-	// if (!game->mlx)
-	// 	return (error_exit("mlx_init failed", game), NULL);
-	// game->win = mlx_new_window(game->mlx, 300, 300, "The Maze");
-	// if (!game->win)
-	// 	return (error_exit("mlx_new_window failed", game), NULL);
+	(*game)->mlx = mlx_init();
+	if (!(*game) -> mlx)
+		return (error_exit("mlx_init failed", (*game)), NULL);
+	(*game)->win = mlx_new_window((*game)->mlx, 300, 300, "The Maze");
+	if (!(*game)->win)
+		return (error_exit("mlx_new_window failed", (*game)), NULL);
 	return ((*game));
 }

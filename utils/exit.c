@@ -6,7 +6,7 @@
 /*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 13:57:26 by skayed            #+#    #+#             */
-/*   Updated: 2025/10/21 15:15:44 by skayed           ###   ########.fr       */
+/*   Updated: 2025/10/27 15:56:41 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,11 @@ void	free_map(t_map *map)
 		free(map->map);
 		map->map = NULL;
 	}
-	// if (map->filename)
-	// 	{free(map->filename);
-	// 	map->filename = NULL;}
+	if (map->filename)
+	{
+		free(map->filename);
+		map->filename = NULL;
+	}
 	free(map);
 }
 
@@ -53,7 +55,6 @@ void	free_graphics(t_graphics *graphics)
 				free(graphics->paths[i]);
 			i++;
 		}
-		// manca free floor e ceiling
 	}
 	free(graphics);
 }
@@ -64,27 +65,26 @@ static void	free_all(t_game *game)
 		free_map(game->map);
 	if (game->graphics)
 		free_graphics(game->graphics);
-	// if (game->mlx)
-	// 	mlx_loop_end(game->mlx);
-	// if (game->win)
-	// {
-	// 	mlx_destroy_window(game->mlx, game->win);
-	// 	game->win = NULL;
-	// }
-	// if (game->mlx)
-	// {
-	// 	mlx_destroy_display(game->mlx);
-	// 	free(game->mlx);
-	// 	game->mlx = NULL;
-	// }
+	if (game->mlx)
+		mlx_loop_end(game->mlx);
+	if (game->win)
+	{
+		mlx_destroy_window(game->mlx, game->win);
+		game->win = NULL;
+	}
+	if (game->mlx)
+	{
+		mlx_destroy_display(game->mlx);
+		free(game->mlx);
+		game->mlx = NULL;
+	}
 	free(game);
 }
 
 void	error_exit(char *msg, t_game *game)
 {
 	if (game)
-		printf("Exiting game...\n");
-		//free_all(game);
+		free_all(game);
 	if (msg)
 		ft_printf("Error:\n%s", msg);
 	exit(EXIT_FAILURE);
