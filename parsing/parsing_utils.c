@@ -6,7 +6,7 @@
 /*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 15:44:32 by skayed            #+#    #+#             */
-/*   Updated: 2025/10/21 19:10:57 by skayed           ###   ########.fr       */
+/*   Updated: 2025/10/27 14:34:57 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,14 @@ void	ft_close(char *msg, char *line, int fd, t_game *game)
 int	map_line(char *line, t_game *game)
 {
 	int	i;
+	int count;
 
 	i = 0;
+	count = 0;
 	while (line[i] && (line[i] == ' ' || line[i] == '\t'))
 		i++;
+	if ((line[i] == '\0' || line[i] == '\n') && game->map->in_map == 1)
+		return (-1); // riga vuota dentro la mappa
 	if (line[i] == '\0')
 		return (0);
 	if (line[i] == '1' || line[i] == '0' || line[i] == 'N' || line[i] == 'S'

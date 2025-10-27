@@ -6,7 +6,7 @@
 /*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 14:25:17 by skayed            #+#    #+#             */
-/*   Updated: 2025/10/21 19:14:27 by skayed           ###   ########.fr       */
+/*   Updated: 2025/10/27 14:34:14 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,12 @@
 static int	handle_map_line(char **line, t_game *game, int fd)
 // passo puntatore alla linea per liberare la memoria e non lavorare su una copia
 {
-	if (!map_line(*line, game))
+	int status;
+	status = map_line(*line, game);
+	if (!status) 
 		return (0);
+	if (status < 0)
+		return (ft_close("Empty line in map", *line, fd, game), -1);
 	if (check_gstruct(game->graphics) < 0)
 		return (ft_close("Missing textures/colors before map", *line, fd, game),
 				-1);
@@ -74,7 +78,6 @@ int	check_cub(t_game *game)
 			return (-1);
 		if (status > 0)
 			continue ;
-
 		trimmed = clean_line(line);
 		free(line);
 		line = trimmed;
