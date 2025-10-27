@@ -6,7 +6,7 @@
 /*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 12:22:27 by skayed            #+#    #+#             */
-/*   Updated: 2025/10/21 15:45:03 by skayed           ###   ########.fr       */
+/*   Updated: 2025/10/27 15:53:24 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	main(int argc, char **argv)
 		verify_map(game);
 		print_map(game->map->map);
 		
-		//mlx_loop(mlx->mlx);
+		mlx_loop(game->mlx);
 		return (0);
 	}
 	else if (argc == 1)
