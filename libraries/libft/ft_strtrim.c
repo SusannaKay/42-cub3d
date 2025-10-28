@@ -3,60 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skayed <skayed@>                           +#+  +:+       +#+        */
+/*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 10:28:16 by skayed            #+#    #+#             */
-/*   Updated: 2024/12/20 18:21:13 by skayed           ###   ########.fr       */
+/*   Updated: 2025/10/28 15:07:02 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
-
-static char	*ft_isempty(void)
-{
-	char	*trimmed;
-
-	trimmed = (char *)malloc(1);
-	if (!trimmed)
-		return (NULL);
-	trimmed[0] = '\0';
-	return (trimmed);
-}
-
-static char	*ft_cpytrim(char *trimmed, const char *s1, int start, int end)
-{
-	int	j;
-
-	j = 0;
-	while (start <= end)
-	{
-		trimmed[j] = s1[start];
-		j++;
-		start++;
-	}
-	trimmed[j] = '\0';
-	return (trimmed);
-}
 
 char	*ft_strtrim(char const *s1, char const *set)
 {
-	char	*trimmed;
-	int		start;
-	int		end;
+	size_t	start;
+	size_t	end;
+	size_t	len;
+	char	*out;
 
-	end = ft_strlen(s1) - 1;
-	if (end < 0)
-		return (ft_strdup(""));
+	if (!s1)
+		return (NULL);
+	if (!set)
+		return (ft_strdup(s1));
+	len = ft_strlen(s1);
 	start = 0;
-	if (!s1 || !set)
-		return (NULL);
-	while (*s1 && ft_strchr(set, s1[start]))
+	while (start < len && ft_strchr(set, s1[start]))
 		start++;
-	while (end > start && ft_strchr(set, s1[end]))
+	end = len;
+	while (end > start && ft_strchr(set, s1[end - 1]))
 		end--;
-	if (start > end)
-		return (ft_isempty());
-	trimmed = (char *)malloc(end - start + 2);
-	if (trimmed == NULL)
+	out = (char *)malloc((end - start + 1) * sizeof(char));
+	if (!out)
 		return (NULL);
-	return (ft_cpytrim(trimmed, s1, start, end));
+	ft_memcpy(out, s1 + start, end - start);
+	out[end - start] = '\0';
+	return (out);
 }
