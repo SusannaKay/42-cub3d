@@ -6,7 +6,7 @@
 /*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 14:52:40 by skayed            #+#    #+#             */
-/*   Updated: 2025/10/17 15:02:59 by skayed           ###   ########.fr       */
+/*   Updated: 2025/10/28 15:30:12 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int	parse_rgb(char *line, t_game *game)
 	int		i;
 	int		num;
 	int		*rgb;
+	char *cleaned;
 
 	if (*line == 'F')
 		rgb = game->graphics->floor;
@@ -36,7 +37,15 @@ int	parse_rgb(char *line, t_game *game)
 	i = 0;
 	while (matrix[i] && i < 3)
 	{
-		clean_line(matrix[i]);
+		cleaned = clean_line(matrix[i]);
+		if (!cleaned)
+		{
+			free_matrix(matrix);
+			return (-1);
+		}
+		free(matrix[i]);
+		matrix[i] = cleaned;
+		//free(cleaned);
 		num = ft_atoi(matrix[i]);
 		if (num < 0 || num > 255)
 		{

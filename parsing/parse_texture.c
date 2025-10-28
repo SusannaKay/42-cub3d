@@ -6,7 +6,7 @@
 /*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 13:37:25 by skayed            #+#    #+#             */
-/*   Updated: 2025/10/17 14:41:34 by skayed           ###   ########.fr       */
+/*   Updated: 2025/10/28 15:17:19 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ int	parse_textures(char *line, t_graphics *graphics)
 			if (*line == '\0')
 				return (-1);
 			refined = clean_line(line);
+			free(line);
 			if (!refined)
 				return (-1);
 			if (check_path(refined) > 0) // file con estensione valida e apribile

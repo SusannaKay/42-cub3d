@@ -6,7 +6,7 @@
 /*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 14:25:17 by skayed            #+#    #+#             */
-/*   Updated: 2025/10/27 14:34:14 by skayed           ###   ########.fr       */
+/*   Updated: 2025/10/28 15:37:30 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ int	check_cub(t_game *game)
 		if (!trimmed)
 			return (error_exit("Malloc failed", game), -1);
 		line = trimmed;
+		free(trimmed);
 		status = handle_map_line(&line, game, fd);
 		if (status < 0)
 			return (-1);
