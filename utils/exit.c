@@ -6,7 +6,7 @@
 /*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 13:57:26 by skayed            #+#    #+#             */
-/*   Updated: 2025/10/27 15:56:41 by skayed           ###   ########.fr       */
+/*   Updated: 2025/10/28 14:43:07 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,32 +30,27 @@ void	free_map(t_map *map)
 		free(map->map);
 		map->map = NULL;
 	}
-	if (map->filename)
-	{
-		free(map->filename);
-		map->filename = NULL;
-	}
 	free(map);
 }
 
 void	free_graphics(t_graphics *graphics)
 {
-	int	i;
+	// int	i;
 
-	i = 0;
-	if (graphics)
-	{
-		while (i < TEX_COUNT)
-		{
-			// if (graphics->wall_img[i])
-			// 	mlx_destroy_image(mlx, graphics->wall_img[i]);
-			if (graphics->flags[i])
-				free((void *)graphics->flags[i]);
-			if (graphics->paths[i])
-				free(graphics->paths[i]);
-			i++;
-		}
-	}
+	// i = 0;
+	// if (graphics)
+	// {
+	// 	// while (i < TEX_COUNT)
+	// 	// {
+	// 	// 	// if (graphics->wall_img[i])
+	// 	// 	// 	mlx_destroy_image(mlx, graphics->wall_img[i]);
+	// 	// 	// if (graphics->flags[i])
+	// 	// 	// 	free((void *)graphics->flags[i]);
+	// 	// 	// if (graphics->paths[i])
+	// 	// 	// 	free(graphics->paths[i]);
+	// 	// 	i++;
+	// 	// }
+	// }
 	free(graphics);
 }
 
