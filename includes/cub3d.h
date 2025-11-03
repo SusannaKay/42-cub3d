@@ -57,7 +57,7 @@ typedef struct s_game
 
 int				check_cub(t_game *game);
 t_game			*init_game(t_game **game);
-void			error_exit(char *msg, t_game *game);
+int				error_exit(char *msg, t_game *game);
 void			free_map(t_map *map);
 void			ft_close(char *msg, char *line, int fd, t_game *game);
 int				parse_textures(char *line, t_graphics *graphics);
@@ -67,5 +67,5 @@ int				save_map(char *line, t_game *game);
 int				map_line(char *line, t_game *game);
 char			*clean_line(char *s);
 void			free_matrix(char **matrix);
-void	verify_map(t_game *game);
+void			verify_map(t_game *game);
 #endif
