@@ -6,20 +6,26 @@
 /*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 12:22:27 by skayed            #+#    #+#             */
-/*   Updated: 2025/10/27 15:53:24 by skayed           ###   ########.fr       */
+/*   Updated: 2025/11/03 12:25:28 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/cub3d.h"
 
-void print_map(char **map)
+static int	key_down(int keysym, t_game *game)
 {
-	int i = 0;
-	while (map && map[i])
-	{
-		printf("%s\n", map[i]);
-		i++;
-	}
+	if (keysym == XK_Escape)
+		error_exit("Quit program by user", game);
+	// else
+	// 	move_player(keysym, game);
+	return (0);
+}
+
+static void	create_loop(t_game *game)
+{
+	mlx_hook(game->win, KeyPress, KeyPressMask, key_down, game);
+	mlx_hook(game->win, 17, 0L, error_exit, game);
+	mlx_loop(game->mlx);
 }
 int	main(int argc, char **argv)
 {
@@ -34,9 +40,7 @@ int	main(int argc, char **argv)
 		game->map->filename = argv[1];
 		check_cub(game);
 		verify_map(game);
-		print_map(game->map->map);
-		
-		mlx_loop(game->mlx);
+		create_loop(game);
 		return (0);
 	}
 	else if (argc == 1)
