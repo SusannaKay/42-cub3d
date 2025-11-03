@@ -6,7 +6,7 @@
 /*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 13:57:26 by skayed            #+#    #+#             */
-/*   Updated: 2025/10/29 17:39:42 by skayed           ###   ########.fr       */
+/*   Updated: 2025/11/03 14:34:36 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,21 +35,20 @@ void	free_map(t_map *map)
 
 void	free_graphics(t_graphics *graphics)
 {
-	// int	i;
-	// i = 0;
-	// if (graphics)
-	// {
-	// 	// while (i < TEX_COUNT)
-	// 	// {
-	// 	// 	// if (graphics->wall_img[i])
-	// 	// 	// 	mlx_destroy_image(mlx, graphics->wall_img[i]);
-	// 	// 	// if (graphics->flags[i])
-	// 	// 	// 	free((void *)graphics->flags[i]);
-	// 	// 	// if (graphics->paths[i])
-	// 	// 	// 	free(graphics->paths[i]);
-	// 	// 	i++;
-	// 	// }
-	// }
+	int	i;
+
+	if (!graphics)
+		return ;
+	i = 0;
+	while (i < TEX_COUNT)
+	{
+		if (graphics->paths[i])
+		{
+			free(graphics->paths[i]);
+			graphics->paths[i] = NULL;
+		}
+		i++;
+	}
 	free(graphics);
 }
 

@@ -6,7 +6,7 @@
 /*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 14:25:17 by skayed            #+#    #+#             */
-/*   Updated: 2025/11/03 12:45:21 by skayed           ###   ########.fr       */
+/*   Updated: 2025/11/03 14:46:40 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,5 +93,6 @@ int	check_cub(t_game *game)
 		free(line);
 		line = get_next_line(fd);
 	}
+	free(line);
 	return (close(fd), 0);
 }
