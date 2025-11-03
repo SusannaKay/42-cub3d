@@ -6,7 +6,7 @@
 /*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 13:57:26 by skayed            #+#    #+#             */
-/*   Updated: 2025/10/28 14:43:07 by skayed           ###   ########.fr       */
+/*   Updated: 2025/10/29 17:39:42 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ void	free_map(t_map *map)
 void	free_graphics(t_graphics *graphics)
 {
 	// int	i;
-
 	// i = 0;
 	// if (graphics)
 	// {
@@ -57,9 +56,15 @@ void	free_graphics(t_graphics *graphics)
 static void	free_all(t_game *game)
 {
 	if (game->map)
+	{
 		free_map(game->map);
+		game->map = NULL;
+	}
 	if (game->graphics)
+	{
 		free_graphics(game->graphics);
+		game->graphics = NULL;
+	}
 	if (game->mlx)
 		mlx_loop_end(game->mlx);
 	if (game->win)
@@ -76,13 +81,14 @@ static void	free_all(t_game *game)
 	free(game);
 }
 
-void	error_exit(char *msg, t_game *game)
+int	error_exit(char *msg, t_game *game)
 {
 	if (game)
 		free_all(game);
 	if (msg)
 		ft_printf("Error:\n%s", msg);
 	exit(EXIT_FAILURE);
+	return (0);
 }
 
 void	free_matrix(char **matrix)
