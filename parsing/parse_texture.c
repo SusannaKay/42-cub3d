@@ -6,7 +6,7 @@
 /*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 13:37:25 by skayed            #+#    #+#             */
-/*   Updated: 2025/10/28 15:17:19 by skayed           ###   ########.fr       */
+/*   Updated: 2025/11/03 12:47:56 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int	parse_textures(char *line, t_graphics *graphics)
 {
 	int		i;
 	char	*refined;
+	char	*path;
 
 	i = 0;
 	while (i < TEX_COUNT)
@@ -43,16 +44,16 @@ int	parse_textures(char *line, t_graphics *graphics)
 		{
 			if (graphics->paths[i] != NULL) //duplicato
 				return (-1);
-			line += 2;
-			if (*line != ' ' && *line != '\t')
+			path = line + 2;
+			if (*path != ' ' && *path != '\t')
 				return (-1);
-			if (*line == '\0')
+			if (*path == '\0')
 				return (-1);
-			refined = clean_line(line);
-			free(line);
+			refined = clean_line(path);
 			if (!refined)
 				return (-1);
-			if (check_path(refined) > 0) // file con estensione valida e apribile
+			if (check_path(refined) > 0)
+				// file con estensione valida e apribile
 				graphics->paths[i] = refined;
 			else
 				return (free(refined), -1);
