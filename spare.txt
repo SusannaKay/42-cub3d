@@ -1,0 +1,11 @@
+funzione check_map
+parsing file cub :
+->int check_graphics
+
+
+
+FUNZIONI EXIT :
+
+rimettere mlx su free graphics
+
+rimettere if lag su makefile
