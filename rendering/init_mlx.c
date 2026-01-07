@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_mlx.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebonacco <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 17:13:40 by ebonacco          #+#    #+#             */
-/*   Updated: 2025/12/16 17:13:52 by ebonacco         ###   ########.fr       */
+/*   Updated: 2026/01/07 15:12:02 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 void	load_frame(t_game *game, t_img *frame)
 {
-	frame->img = mlx_new_image(game->mlx, WIDTH, HEIGHT); // mlx_new_image: framebuffer principale dove sono scritti i pixel poi tutto sara passato a schermo con mlx_put_image_to_window
+	frame->img = mlx_new_image(game->mlx, WIDTH, HEIGHT);
 	if (!frame->img)
 		error_exit("mlx_new_image failed", game);
-	frame->addr = mlx_get_data_addr(frame->img, // puntatore per accedere ai pixel, questi valori li riempie mlx
+	frame->addr = mlx_get_data_addr(frame->img,
 			&frame->bit_pp, &frame->line_len, &frame->endian);
 	if (!frame->addr)
 		error_exit("mlx_get_data_addr failed", game);
@@ -25,7 +25,7 @@ void	load_frame(t_game *game, t_img *frame)
 
 void	load_hand(t_game *game, t_img *hand, char *path)
 {
-	hand->img = mlx_xpm_file_to_image(game->mlx, path, &hand->w, &hand->h); // carica un file xpm in un’immagine mlx (mlx_new_image) già inizializzata
+	hand->img = mlx_xpm_file_to_image(game->mlx, path, &hand->w, &hand->h);
 	if (!hand->img)
 		error_exit("mlx_xpm_file_to_image failed", game);
 	hand->addr = mlx_get_data_addr(hand->img, &hand->bit_pp,

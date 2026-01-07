@@ -3,19 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   draw_3d.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebonacco <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 17:31:53 by ebonacco          #+#    #+#             */
-/*   Updated: 2025/12/16 17:31:57 by ebonacco         ###   ########.fr       */
+/*   Updated: 2026/01/07 15:26:04 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
-
-unsigned int	rgb_int(int rgb[3])
-{
-	return ((rgb[0] << 16) | (rgb[1] << 8) | rgb[2]);
-}
 
 void	put_pixel(t_img *frame, int x, int y, unsigned int color)
 {
@@ -23,7 +18,7 @@ void	put_pixel(t_img *frame, int x, int y, unsigned int color)
 	int		bytes_pp;
 
 	bytes_pp = frame->bit_pp / 8;
-	dst = frame->addr + (y * frame->line_len) + (x * bytes_pp); // (y * frame->line_len) ti porta all’inizio della riga y, (x * bytes_pp) ti sposta nel pixel esatto. Finisce tutto in frame->addr!
+	dst = frame->addr + (y * frame->line_len) + (x * bytes_pp);
 	*(unsigned int *)dst = color;
 }
 
@@ -39,11 +34,11 @@ unsigned int	get_pixel(t_img *img, int x, int y)
 
 void	draw_texture(t_game *game, t_wall *wall)
 {
-	double		step;
-	double		tex_pos;
+	double				step;
+	double				tex_pos;
 	unsigned int		color;
-	int			y;
-	int			tex_y;
+	int					y;
+	int					tex_y;
 
 	step = (double)wall->tex->h / wall->line_h;
 	tex_pos = (wall->start - HEIGHT / 2 + wall->line_h / 2) * step;
@@ -79,8 +74,8 @@ void	draw_world(t_game *game, int x)
 
 void	draw_hand(t_game *game, t_img *hand, int off_x, int off_y)
 {
-	int		x;
-	int		y;
+	int				x;
+	int				y;
 	unsigned int	color;
 
 	y = 0;
