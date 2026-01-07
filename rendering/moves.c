@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   moves.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebonacco <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 17:46:19 by ebonacco          #+#    #+#             */
-/*   Updated: 2025/12/10 17:46:23 by ebonacco         ###   ########.fr       */
+/*   Updated: 2026/01/07 13:39:33 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	move(t_map *map, double dir_x, double dir_y)
 
 	new_p_x = map->p_x + dir_x * MOVE;
 	new_p_y = map->p_y + dir_y * MOVE;
-	if ((map->map[(int)map->p_y][(int)(new_p_x + dir_x * COLLISION)]) != '1') // COLLISION lo avevo utilizzato perche si deformava la texture quando mi avvicinavo pero credo che ora si possa anche eliminare, era solo un offset per non arrivare troppo vicino alla texture
+	if ((map->map[(int)map->p_y][(int)(new_p_x + dir_x * COLLISION)]) != '1')
 		map->p_x = new_p_x;
 	if ((map->map[(int)(new_p_y + dir_y * COLLISION)][(int)map->p_x]) != '1')
 		map->p_y = new_p_y;
@@ -45,7 +45,7 @@ void	move(t_map *map, double dir_x, double dir_y)
 void	moves(t_game *game)
 {
 	if (game->keys->w)
-		move(game->map, game->map->dir_x, game->map->dir_y); // plane e perpendicolare a dir quindi vanno immaginate come se fossero assi cartesiani perche dir e solo avanti-dietro e plane destra-sinistra
+		move(game->map, game->map->dir_x, game->map->dir_y);
 	else if (game->keys->s)
 		move(game->map, -game->map->dir_x, -game->map->dir_y);
 	else if (game->keys->a)
