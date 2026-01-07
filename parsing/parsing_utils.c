@@ -6,13 +6,13 @@
 /*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 15:44:32 by skayed            #+#    #+#             */
-/*   Updated: 2025/10/27 16:08:21 by skayed           ###   ########.fr       */
+/*   Updated: 2026/01/07 15:30:40 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-char	*clean_line(char *s) // pulisce le spaziature e i tab iniziali e finali
+char	*clean_line(char *s)
 {
 	int		start;
 	int		end;
@@ -58,7 +58,8 @@ void	line_len(t_game *game)
 	while (game->map->map[i])
 	{
 		j = 0;
-		while (game->map->map[i][j] && game->map->map[i][j] != '\n' && game->map->map[i][j] != '\t' && game->map->map[i][j] != ' ')
+		while (game->map->map[i][j] && game->map->map[i][j] != '\n'
+				&& game->map->map[i][j] != '\t' && game->map->map[i][j] != ' ')
 			j++;
 		if (j > game->graphics->line_len)
 			game->graphics->line_len = j;
@@ -74,7 +75,7 @@ int	map_line(char *line, t_game *game)
 	while (line[i] && (line[i] == ' ' || line[i] == '\t'))
 		i++;
 	if ((line[i] == '\0' || line[i] == '\n') && game->map->in_map == 1)
-		return (-1); // riga vuota dentro la mappa
+		return (-1);
 	if (line[i] == '\0')
 		return (0);
 	if (line[i] == '1' || line[i] == '0' || line[i] == 'N' || line[i] == 'S'
@@ -92,7 +93,6 @@ int	map_line(char *line, t_game *game)
 }
 
 int	check_gstruct(t_graphics *graphics)
-// controlla se manca qualche info grafica
 {
 	int		i;
 

@@ -6,14 +6,13 @@
 /*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 14:25:17 by skayed            #+#    #+#             */
-/*   Updated: 2025/11/03 14:46:40 by skayed           ###   ########.fr       */
+/*   Updated: 2026/01/07 14:52:40 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
 static int	handle_map_line(char **line, t_game *game, int fd)
-// passo puntatore alla linea per liberare la memoria e non lavorare su una copia
 {
 	int		status;
 

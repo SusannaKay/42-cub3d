@@ -6,13 +6,13 @@
 /*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 13:45:36 by skayed            #+#    #+#             */
-/*   Updated: 2025/10/21 19:00:38 by skayed           ###   ########.fr       */
+/*   Updated: 2026/01/07 15:29:02 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-static int	check_char(char *line)
+static int	check_line(char *line)
 {
 	int	i;
 
@@ -48,7 +48,7 @@ int	save_map(char *line, t_game *game)
 	rows = 0;
 	if (!line || *line == '\0')
 		return (0);
-	if (!check_char(line))
+	if (!check_line(line))
 		return (error_exit("Invalid character in map line", game), -1);
 	rows = find_last_row(game->map->map);
 	new_map = (char **)malloc(sizeof(char *) * (rows + 2));

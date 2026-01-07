@@ -6,13 +6,11 @@
 /*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 13:37:25 by skayed            #+#    #+#             */
-/*   Updated: 2025/11/03 12:47:56 by skayed           ###   ########.fr       */
+/*   Updated: 2026/01/07 14:53:15 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
-
-// controlla se l'estensione e' giusta e se e' possibile aprirle il file grafico
 
 static int	check_path(char *line)
 {
@@ -42,7 +40,7 @@ int	parse_textures(char *line, t_graphics *graphics)
 	{
 		if (!ft_strncmp(line, graphics->flags[i], 2))
 		{
-			if (graphics->paths[i] != NULL) //duplicato
+			if (graphics->paths[i] != NULL)
 				return (-1);
 			path = line + 2;
 			if (*path != ' ' && *path != '\t')
@@ -53,7 +51,6 @@ int	parse_textures(char *line, t_graphics *graphics)
 			if (!refined)
 				return (-1);
 			if (check_path(refined) > 0)
-				// file con estensione valida e apribile
 				graphics->paths[i] = refined;
 			else
 				return (free(refined), -1);

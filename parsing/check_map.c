@@ -6,7 +6,7 @@
 /*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 15:26:52 by skayed            #+#    #+#             */
-/*   Updated: 2025/10/23 17:30:26 by skayed           ###   ########.fr       */
+/*   Updated: 2026/01/07 15:27:40 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,10 @@ static int	is_closed(char **map)
 		{
 			if (i == 0 || j == 0 || map[i + 1] == NULL || map[i][j + 1] == '\0')
 			{
-				if (map[i][j] == '0' || map[i][j] == 'N' || map[i][j] == 'S' ||
-				map[i][j] == 'E' || map[i][j] == 'W')
+				if (check_char(map[i][j]))
 					return (0);
 			}
-			if (map[i][j] == '0' || map[i][j] == 'N' || map[i][j] == 'S' ||
-				map[i][j] == 'E' || map[i][j] == 'W')
+			if (check_char(map[i][j]))
 			{
 				if (check_directions(map, j, i) < 0)
 					return (0);

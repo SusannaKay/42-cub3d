@@ -6,7 +6,7 @@
 #    By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/22 10:14:02 by skayed            #+#    #+#              #
-#    Updated: 2025/10/27 15:58:21 by skayed           ###   ########.fr        #
+#    Updated: 2026/01/07 15:24:09 by skayed           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,8 @@ SRC = main.c \
 	init_ray.c \
 	init_wall.c \
 	init_struct.c \
-	exit.c
+	exit.c \
+	utils.c
 	
 vpath %.c parsing \
 	:rendering \

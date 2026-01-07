@@ -6,7 +6,7 @@
 /*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 13:57:26 by skayed            #+#    #+#             */
-/*   Updated: 2025/11/03 14:34:36 by skayed           ###   ########.fr       */
+/*   Updated: 2026/01/07 15:08:06 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ int	error_exit(char *msg, t_game *game)
 	return (0);
 }
 
-int	exit_destroy(t_game *game) // e necessaria questa semi duplicazione perche l'evento destroy di mlx chiama la callback con questa firma int (*f)(void *param) quindi il param msg lo prende come se fosse game, probabilmente invertendoli funzionerebbe cmq;
+int	exit_destroy(t_game *game)
 {
 	if (game)
 		free_all(game);

@@ -158,5 +158,6 @@ void	rotations(t_game *game);
 void draw_hand(t_game *game, t_img *hand, int off_x, int off_y);
 void draw_texture(t_game *game, t_wall *wall);
 int	exit_destroy(t_game *game);
+int	check_char(char c);
 
 #endif
