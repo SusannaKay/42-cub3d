@@ -6,7 +6,7 @@
 /*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 12:22:27 by skayed            #+#    #+#             */
-/*   Updated: 2026/01/07 12:53:30 by skayed           ###   ########.fr       */
+/*   Updated: 2026/01/08 12:11:49 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	key_down(int keysym, t_game *game)
 {
 	if (keysym == ESC)
-		exit_destroy(game); // EU attenzione questa chiamata e stata cambiata vedi dopo
+		exit_destroy(game);
 	if (keysym == W)
 		game->keys->w = 1;
 	if (keysym == S)
