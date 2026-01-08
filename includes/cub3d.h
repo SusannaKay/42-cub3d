@@ -63,24 +63,26 @@ typedef struct s_map
 
 typedef struct s_img
 {
-	void	*img; // tutta l'immagine che viene pushata con mlx_put_image_to_window
-	char	*addr; // permette di accedere ai dati che sono gia popolati in void *img
-	int		bit_pp;
-	int		line_len; // bytes per riga
-	int		endian;
-	int		w;
-	int		h;
+	void		*img;
+	// tutta l'immagine che viene pushata con mlx_put_image_to_window
+	char		*addr;
+	// permette di accedere ai dati che sono gia popolati in void *img
+	int			bit_pp;
+	int line_len; // bytes per riga
+	int			endian;
+	int			w;
+	int			h;
 }				t_img;
 
 typedef struct s_wall
 {
-	int	x;
-	int	start;
-	int	end;
-	int	line_h;
-	int	tex_x;
-	t_img	*tex;
-}	t_wall;
+	int			x;
+	int			start;
+	int			end;
+	int			line_h;
+	int			tex_x;
+	t_img		*tex;
+}				t_wall;
 
 typedef struct s_graphics
 {
@@ -99,12 +101,12 @@ typedef struct s_graphics
 
 typedef struct s_keys
 {
-	int		w;
-	int		s;
-	int		a;
-	int		d;
-	int		left;
-	int		right;
+	int			w;
+	int			s;
+	int			a;
+	int			d;
+	int			left;
+	int			right;
 }				t_keys;
 
 typedef struct s_game
@@ -116,48 +118,50 @@ typedef struct s_game
 	void		*win;
 }				t_game;
 
-int		check_cub(t_game *game);
-t_game	*init_game(t_game **game);
-int		error_exit(char *msg, t_game *game);
-void	free_map(t_map *map);
-void	ft_close(char *msg, char *line, int fd, t_game *game);
-int		parse_textures(char *line, t_graphics *graphics);
-int		parse_rgb(char *line, t_game *game);
-int		check_gstruct(t_graphics *graphics);
-int		save_map(char *line, t_game *game);
-int		map_line(char *line, t_game *game);
-char	*clean_line(char *s);
-void	free_matrix(char **matrix);
-void	verify_map(t_game *game);
+int				check_cub(t_game *game);
+t_game			*init_game(t_game **game);
+int				error_exit(char *msg, t_game *game);
+void			free_map(t_map *map);
+void			ft_close(char *msg, char *line, int fd, t_game *game);
+int				parse_textures(char *line, t_graphics *graphics);
+int				parse_rgb(char *line, t_game *game);
+int				check_gstruct(t_graphics *graphics);
+int				save_map(char *line, t_game *game);
+int				map_line(char *line, t_game *game);
+char			*clean_line(char *s);
+void			free_matrix(char **matrix);
+void			verify_map(t_game *game);
 
-void	find_plane(t_map *map);
-int		init_render(t_game *game);
-void	init_mlx(t_game *game);
-int		render_frame(t_game *game);
-void	player_dir(t_game *game);
-void	line_len(t_game *game);
+void			find_plane(t_map *map);
+int				init_render(t_game *game);
+void			init_mlx(t_game *game);
+int				render_frame(t_game *game);
+void			player_dir(t_game *game);
+void			line_len(t_game *game);
 
-void	init_ray(t_map *map, double camera_x);
-void	dda(t_map *map);
-void	draw_world(t_game *game, int i);
-void	init_map_defaults(t_map *map);
-void 	move(t_map *map, double dx, double dy);
-void	find_plane(t_map *map);
-void	init_delta(t_map *map);
-void	init_step(t_map *map);
-void	init_side(t_map *map);
-void	draw_col(t_game *game, int x, int start, int end, unsigned int color);
-void	height_limits(int line_h, int *start, int *end);
-double	distance(t_map *map);
-void put_pixel(t_img *frame, int x, int y, unsigned int color);
-void	raycast(t_game *game);
+void			init_ray(t_map *map, double camera_x);
+void			dda(t_map *map);
+void			draw_world(t_game *game, int i);
+void			init_map_defaults(t_map *map);
+void			move(t_map *map, double dx, double dy);
+void			find_plane(t_map *map);
+void			init_delta(t_map *map);
+void			init_step(t_map *map);
+void			init_side(t_map *map);
+void			draw_col(t_game *game, int x, int start, int end,
+					unsigned int color);
+void			height_limits(int line_h, int *start, int *end);
+double			distance(t_map *map);
+void			put_pixel(t_img *frame, int x, int y, unsigned int color);
+void			raycast(t_game *game);
 unsigned int	rgb_int(int rgb[3]);
-void	init_wall(t_game *game, t_wall *wall, int x, double dist);
-void	moves(t_game *game);
-void	rotations(t_game *game);
-void draw_hand(t_game *game, t_img *hand, int off_x, int off_y);
-void draw_texture(t_game *game, t_wall *wall);
-int	exit_destroy(t_game *game);
-int	check_char(char c);
+void			init_wall(t_game *game, t_wall *wall, int x, double dist);
+void			moves(t_game *game);
+void			rotations(t_game *game);
+void			draw_hand(t_game *game, t_img *hand, int off_x, int off_y);
+void			draw_texture(t_game *game, t_wall *wall);
+int				exit_destroy(t_game *game);
+int				check_char(char c);
+void	free_all(t_game *game);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 13:37:25 by skayed            #+#    #+#             */
-/*   Updated: 2026/01/07 14:53:15 by skayed           ###   ########.fr       */
+/*   Updated: 2026/01/08 15:47:42 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,17 +35,15 @@ int	parse_textures(char *line, t_graphics *graphics)
 	char	*refined;
 	char	*path;
 
-	i = 0;
-	while (i < TEX_COUNT)
+	i = -1;
+	while (++i < TEX_COUNT)
 	{
 		if (!ft_strncmp(line, graphics->flags[i], 2))
 		{
 			if (graphics->paths[i] != NULL)
 				return (-1);
 			path = line + 2;
-			if (*path != ' ' && *path != '\t')
-				return (-1);
-			if (*path == '\0')
+			if ((*path != ' ' && *path != '\t') || *path == '\0')
 				return (-1);
 			refined = clean_line(path);
 			if (!refined)
@@ -56,7 +54,6 @@ int	parse_textures(char *line, t_graphics *graphics)
 				return (free(refined), -1);
 			return (1);
 		}
-		i++;
 	}
 	return (0);
 }

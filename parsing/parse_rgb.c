@@ -6,33 +6,55 @@
 /*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 14:52:40 by skayed            #+#    #+#             */
-/*   Updated: 2026/01/07 16:15:27 by skayed           ###   ########.fr       */
+/*   Updated: 2026/01/08 14:31:52 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-static int assign_fc(char c)
+static int	*assign_fc(char c, t_game *game)
 {
 	if (c == 'F')
-		rgb = game->graphics->floor;
-	else if (c == 'C')
-		rgb = game->graphics->ceiling;
-	else
+		return (game->graphics->floor);
+	if (c == 'C')
+		return (game->graphics->ceiling);
+	return (NULL);
+}
+
+static int	fill_rgb(char **matrix, int *rgb)
+{
+	int		i;
+	int		num;
+	char	*cleaned;
+
+	i = 0;
+	while (matrix[i] && i < 3)
+	{
+		cleaned = clean_line(matrix[i]);
+		if (!cleaned)
+			return (-1);
+		free(matrix[i]);
+		matrix[i] = cleaned;
+		num = ft_atoi(matrix[i]);
+		if (num < 0 || num > 255)
+			return (-1);
+		if (rgb[i] != -1)
+			return (-1);
+		rgb[i] = num;
+		i++;
+	}
+	if (i != 3 || matrix[i] != NULL)
 		return (-1);
 	return (0);
 }
 
-static int 
 int	parse_rgb(char *line, t_game *game)
 {
 	char	**matrix;
-	int		i;
-	int		num;
 	int		*rgb;
-	char	*cleaned;
 
-	if (assign_fc(*line) < 0)
+	rgb = assign_fc(*line, game);
+	if (!rgb)
 		return (-1);
 	line++;
 	while (line && (*line == ' ' || *line == '\t'))
@@ -42,23 +64,7 @@ int	parse_rgb(char *line, t_game *game)
 	matrix = ft_split(line, ',');
 	if (!matrix)
 		return (-1);
-	i = 0;
-	while (matrix[i] && i < 3)
-	{
-		cleaned = clean_line(matrix[i]);
-		if (!cleaned)
-			return (free_matrix(matrix), -1);
-		free(matrix[i]);
-		matrix[i] = cleaned;
-		num = ft_atoi(matrix[i]);
-		if (num < 0 || num > 255)
-			return (free_matrix(matrix), -1);
-		if (rgb[i] != -1)
-			return (free_matrix(matrix), -1);
-		rgb[i] = num;
-		i++;
-	}
-	if (i != 3 || matrix[i] != NULL)
+	if (fill_rgb(matrix, rgb) != 0)
 		return (free_matrix(matrix), -1);
 	free_matrix(matrix);
 	return (0);
