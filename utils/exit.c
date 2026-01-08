@@ -6,7 +6,7 @@
 /*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 13:57:26 by skayed            #+#    #+#             */
-/*   Updated: 2026/01/07 15:08:06 by skayed           ###   ########.fr       */
+/*   Updated: 2026/01/08 14:28:57 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,15 @@ void	free_graphics(t_graphics *graphics, void *mlx)
 	free(graphics);
 }
 
-static void	free_all(t_game *game)
+static void	destroy_mlx(t_game *game)
+{
+	mlx_loop_end(game->mlx);
+	mlx_destroy_display(game->mlx);
+	free(game->mlx);
+	game->mlx = NULL;
+}
+
+void	free_all(t_game *game)
 {
 	if (!game)
 		return ;
@@ -86,23 +94,8 @@ static void	free_all(t_game *game)
 		game->win = NULL;
 	}
 	if (game->mlx)
-	{
-		mlx_loop_end(game->mlx);
-		mlx_destroy_display(game->mlx);
-		free(game->mlx);
-		game->mlx = NULL;
-	}
+		destroy_mlx(game);
 	free(game);
-}
-
-int	error_exit(char *msg, t_game *game)
-{
-	if (game)
-		free_all(game);
-	if (msg)
-		ft_printf("Error:\n%s", msg);
-	exit(EXIT_FAILURE);
-	return (0);
 }
 
 int	exit_destroy(t_game *game)
@@ -111,20 +104,4 @@ int	exit_destroy(t_game *game)
 		free_all(game);
 	exit(0);
 	return (0);
-}
-
-void	free_matrix(char **matrix)
-{
-	int	i;
-
-	if (!matrix)
-		return ;
-	i = 0;
-	while (matrix[i])
-	{
-		free(matrix[i]);
-		matrix[i] = NULL;
-		i++;
-	}
-	free(matrix);
 }

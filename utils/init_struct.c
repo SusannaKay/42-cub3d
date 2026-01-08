@@ -6,7 +6,7 @@
 /*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 15:23:31 by skayed            #+#    #+#             */
-/*   Updated: 2025/10/27 15:55:24 by skayed           ###   ########.fr       */
+/*   Updated: 2026/01/08 12:15:53 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ static void	init_graphics_defaults(t_graphics *graphics)
 	graphics->ceiling[0] = -1;
 	graphics->ceiling[1] = -1;
 	graphics->ceiling[2] = -1;
-
 	graphics->line_len = 0;
 }
 
@@ -40,7 +39,6 @@ void	init_map_defaults(t_map *map)
 	map->p_x = -1;
 	map->p_y = -1;
 	map->p_dir = '\0';
-
 	map->ray_x = 0;
 	map->ray_y = 0;
 	map->dir_x = 0;
@@ -59,31 +57,22 @@ void	init_map_defaults(t_map *map)
 
 static void	init_img_defaults(t_img wall_img[TEX_COUNT])
 {
-	int		i;
+	int	i;
 
 	i = 0;
-    while (i < TEX_COUNT)
-    {
-        wall_img[i].img = NULL;
-        wall_img[i].addr = NULL;
-        wall_img[i].bit_pp = 0;
-        wall_img[i].line_len = 0;
-        wall_img[i].endian = 0;
-        wall_img[i].w = 0;
-        wall_img[i].h = 0;
-        i++;
-    }
+	while (i < TEX_COUNT)
+	{
+		wall_img[i].img = NULL;
+		wall_img[i].addr = NULL;
+		wall_img[i].bit_pp = 0;
+		wall_img[i].line_len = 0;
+		wall_img[i].endian = 0;
+		wall_img[i].w = 0;
+		wall_img[i].h = 0;
+		i++;
+	}
 }
-/*
-static void	init_wall_defaults(t_wall *wall)
-{
-    wall->x = 0;
-    wall->start = 0;
-    wall->end = 0;
-    wall->line_h = 0;
-    wall->tex_x = 0;
-}
-*/
+
 void	init_keys_defaults(t_keys *keys)
 {
 	if (!keys)
@@ -96,22 +85,22 @@ void	init_keys_defaults(t_keys *keys)
 	keys->right = 0;
 }
 
-t_game *init_game(t_game **game)
+t_game	*init_game(t_game **game)
 {
 	(*game)->mlx = NULL;
-    (*game)->win = NULL;
-    (*game)->graphics = ft_calloc(1, sizeof(t_graphics));
-    if (!(*game)->graphics)
-        return (error_exit("Malloc failed", (*game)), NULL);
-    init_graphics_defaults((*game)->graphics);
+	(*game)->win = NULL;
+	(*game)->graphics = ft_calloc(1, sizeof(t_graphics));
+	if (!(*game)->graphics)
+		return (error_exit("Malloc failed", (*game)), NULL);
+	init_graphics_defaults((*game)->graphics);
 	init_img_defaults((*game)->graphics->wall_img);
-    (*game)->map = ft_calloc(1, sizeof(t_map));
-    if (!(*game)->map)
-        return (error_exit("Malloc failed", (*game)), NULL);
-    init_map_defaults((*game)->map);
-    (*game)->keys = ft_calloc(1, sizeof(t_keys));
-    if (!(*game)->keys)
+	(*game)->map = ft_calloc(1, sizeof(t_map));
+	if (!(*game)->map)
+		return (error_exit("Malloc failed", (*game)), NULL);
+	init_map_defaults((*game)->map);
+	(*game)->keys = ft_calloc(1, sizeof(t_keys));
+	if (!(*game)->keys)
 		return (error_exit("Malloc failed", (*game)), NULL);
 	init_keys_defaults((*game)->keys);
-    return (*game);
+	return (*game);
 }
