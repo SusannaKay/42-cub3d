@@ -6,7 +6,7 @@
 /*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 14:25:17 by skayed            #+#    #+#             */
-/*   Updated: 2026/01/08 14:38:05 by skayed           ###   ########.fr       */
+/*   Updated: 2026/01/15 14:18:24 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	handle_map_line(char **line, t_game *game, int fd)
 {
-	int		status;
+	int	status;
 
 	status = map_line(*line, game);
 	if (!status)
@@ -55,12 +55,37 @@ static int	handle_config_line(char *line, t_game *game, int fd)
 	return (0);
 }
 
+static void	read_check(char **line, int fd, t_game *game)
+{
+	char	*trimmed;
+
+	trimmed = ft_strtrim(*line, "\n");
+	free(*line);
+	if (!trimmed)
+		error_exit("Malloc failed", game);
+	*line = trimmed;
+	if (handle_map_line(line, game, fd) > 0)
+		return ;
+	trimmed = clean_line(*line);
+	free(*line);
+	*line = trimmed;
+	if (*line == NULL || *(*line) == '\0')
+	{
+		free(*line);
+		*line = get_next_line(fd);
+		return ;
+	}
+	if (handle_config_line(*line, game, fd) <= 0)
+		ft_close("Unexpected configuration line", *line, fd, game);
+	free(*line);
+	*line = get_next_line(fd);
+	return ;
+}
+
 int	check_cub(t_game *game)
 {
 	int		fd;
 	char	*line;
-	char	*trimmed;
-	int		status;
 
 	fd = open(game->map->filename, O_RDONLY);
 	if (fd == -1)
@@ -68,30 +93,7 @@ int	check_cub(t_game *game)
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
-		trimmed = ft_strtrim(line, "\n");
-		free(line);
-		if (!trimmed)
-			return (error_exit("Malloc failed", game), -1);
-		line = trimmed;
-		status = handle_map_line(&line, game, fd);
-		if (status < 0)
-			return (-1);
-		if (status > 0)
-			continue ;
-		trimmed = clean_line(line);
-		free(line);
-		line = trimmed;
-		if (!line || *line == '\0')
-		{
-			free(line);
-			line = get_next_line(fd);
-			continue ;
-		}
-		if (handle_config_line(line, game, fd) <= 0)
-			return (ft_close("Unexpected configuration line", line, fd, game),
-				-1);
-		free(line);
-		line = get_next_line(fd);
+		read_check(&line, fd, game);
 	}
 	free(line);
 	return (close(fd), 0);
