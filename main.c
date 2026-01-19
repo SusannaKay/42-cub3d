@@ -6,7 +6,7 @@
 /*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 12:22:27 by skayed            #+#    #+#             */
-/*   Updated: 2026/01/08 12:11:49 by skayed           ###   ########.fr       */
+/*   Updated: 2026/01/19 10:11:24 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ int	main(int argc, char **argv)
 
 	if (argc == 2)
 	{
-		if (!ft_strnstr(argv[1], ".cub", ft_strlen(argv[1])))
+		if (!ft_strnstr(argv[1], ".cub", ft_strlen(".cub")))
 			return (error_exit("Map format should be *.cub", NULL), -1);
 		game = ft_calloc(1, sizeof(t_game));
 		if (!game)

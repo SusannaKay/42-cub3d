@@ -6,7 +6,7 @@
 /*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 14:52:40 by skayed            #+#    #+#             */
-/*   Updated: 2026/01/08 14:31:52 by skayed           ###   ########.fr       */
+/*   Updated: 2026/01/19 10:14:51 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,20 @@ static int	*assign_fc(char c, t_game *game)
 	if (c == 'C')
 		return (game->graphics->ceiling);
 	return (NULL);
+}
+
+static int	line_isdigit(char *line)
+{
+	int	i;
+
+	i = 0;
+	while (line[i])
+	{
+		if (!ft_isdigit(line[i]))
+			return (-1);
+		i++;
+	}
+	return (0);
 }
 
 static int	fill_rgb(char **matrix, int *rgb)
@@ -35,6 +49,8 @@ static int	fill_rgb(char **matrix, int *rgb)
 			return (-1);
 		free(matrix[i]);
 		matrix[i] = cleaned;
+		if (line_isdigit(matrix[i]) < 0)
+			return (-1);
 		num = ft_atoi(matrix[i]);
 		if (num < 0 || num > 255)
 			return (-1);

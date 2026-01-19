@@ -6,7 +6,7 @@
 /*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 14:25:17 by skayed            #+#    #+#             */
-/*   Updated: 2026/01/15 14:18:24 by skayed           ###   ########.fr       */
+/*   Updated: 2026/01/15 14:55:21 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,5 +96,7 @@ int	check_cub(t_game *game)
 		read_check(&line, fd, game);
 	}
 	free(line);
+	if (game->map->map == NULL)
+		return (error_exit("Map is missing", game), -1);
 	return (close(fd), 0);
 }
