@@ -6,7 +6,7 @@
 /*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 13:57:26 by skayed            #+#    #+#             */
-/*   Updated: 2026/01/08 14:28:57 by skayed           ###   ########.fr       */
+/*   Updated: 2026/01/19 14:40:19 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ void	free_map(t_map *map)
 		free(map->map);
 		map->map = NULL;
 	}
-	printf("free_all: game->map = %p\n", map);
 	free(map);
 }
 
