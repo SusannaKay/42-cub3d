@@ -6,7 +6,7 @@
 /*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 15:23:31 by skayed            #+#    #+#             */
-/*   Updated: 2026/01/08 12:15:53 by skayed           ###   ########.fr       */
+/*   Updated: 2026/01/19 10:40:22 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,16 +91,16 @@ t_game	*init_game(t_game **game)
 	(*game)->win = NULL;
 	(*game)->graphics = ft_calloc(1, sizeof(t_graphics));
 	if (!(*game)->graphics)
-		return (error_exit("Malloc failed", (*game)), NULL);
+		return (error_exit("Malloc failed\n", (*game)), NULL);
 	init_graphics_defaults((*game)->graphics);
 	init_img_defaults((*game)->graphics->wall_img);
 	(*game)->map = ft_calloc(1, sizeof(t_map));
 	if (!(*game)->map)
-		return (error_exit("Malloc failed", (*game)), NULL);
+		return (error_exit("Malloc failed\n", (*game)), NULL);
 	init_map_defaults((*game)->map);
 	(*game)->keys = ft_calloc(1, sizeof(t_keys));
 	if (!(*game)->keys)
-		return (error_exit("Malloc failed", (*game)), NULL);
+		return (error_exit("Malloc failed\n", (*game)), NULL);
 	init_keys_defaults((*game)->keys);
 	return (*game);
 }

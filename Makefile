@@ -6,15 +6,14 @@
 #    By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/22 10:14:02 by skayed            #+#    #+#              #
-#    Updated: 2026/01/07 15:24:09 by skayed           ###   ########.fr        #
+#    Updated: 2026/01/19 14:37:07 by skayed           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3d
 CC = gcc
 CFLAGS = -g -gdwarf-4 -O0 -I./include -Imlx -Wall -Wextra -Werror
-
-MKDIR = mkdir -p
+OBJ_DIR = objs
 
 MINILIBX_PATH = libraries/mlx
 MINILIBX = $(MINILIBX_PATH)/libmlx.a
@@ -40,11 +39,11 @@ SRC = main.c \
 	exit.c \
 	utils.c
 	
-vpath %.c parsing \
-	:rendering \
-	:utils
+vpath %.c parsing rendering utils
+
  
-OBJ = $(addprefix objs/, $(SRC:.c=.o))
+OBJ = $(patsubst %.c,$(OBJ_DIR)/%.o,$(SRC))
+
 
 all: $(NAME)
 
@@ -54,14 +53,12 @@ $(NAME): $(OBJ) $(MINILIBX) $(LIBFT)
 	-L/usr/lib -lXext -lX11 -lm -lz \
 	-o $(NAME)
 	
-objs/%.o: %.c mkobjsdir
-	$(CC) $(CFLAGS) -I/usr/include -Imlx -I$(LIBFT_PATH) -O3 -c $< -o $@
-
-mkobjsdir:
-	$(MKDIR) objs
+$(OBJ_DIR)/%.o: %.c
+	@mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) -I/usr/include -Imlx -I$(LIBFT_PATH) -c $< -o $@
 
 clean: 
-	rm -f $(OBJ)
+	rm -rf $(OBJ_DIR)
 	make -C $(MINILIBX_PATH) clean
 	make -C $(LIBFT_PATH) clean
 
@@ -79,4 +76,4 @@ $(MINILIBX):
 $(LIBFT):
 	make -C $(LIBFT_PATH)
 
-.PHONY: all bonus clean fclean re
+.PHONY: all clean fclean re 

@@ -6,7 +6,7 @@
 /*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 14:25:17 by skayed            #+#    #+#             */
-/*   Updated: 2026/01/15 14:55:21 by skayed           ###   ########.fr       */
+/*   Updated: 2026/01/19 10:39:07 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int	handle_map_line(char **line, t_game *game, int fd)
 		return (ft_close("Empty line in map", *line, fd, game), -1);
 	if (check_gstruct(game->graphics) < 0)
 		return (ft_close("Missing textures/colors before map", *line, fd, game),
-			-1);
+				-1);
 	if (save_map(*line, game) < 0)
 		return (ft_close("Map not valid", *line, fd, game), -1);
 	free(*line);
@@ -62,7 +62,7 @@ static void	read_check(char **line, int fd, t_game *game)
 	trimmed = ft_strtrim(*line, "\n");
 	free(*line);
 	if (!trimmed)
-		error_exit("Malloc failed", game);
+		error_exit("Malloc failed\n", game);
 	*line = trimmed;
 	if (handle_map_line(line, game, fd) > 0)
 		return ;
@@ -89,7 +89,7 @@ int	check_cub(t_game *game)
 
 	fd = open(game->map->filename, O_RDONLY);
 	if (fd == -1)
-		return (error_exit("Open file failed", game), -1);
+		return (error_exit("Open file failed\n", game), -1);
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
@@ -97,6 +97,6 @@ int	check_cub(t_game *game)
 	}
 	free(line);
 	if (game->map->map == NULL)
-		return (error_exit("Map is missing", game), -1);
+		return (error_exit("Map is missing\n", game), -1);
 	return (close(fd), 0);
 }

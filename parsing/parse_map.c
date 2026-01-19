@@ -6,7 +6,7 @@
 /*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 13:45:36 by skayed            #+#    #+#             */
-/*   Updated: 2026/01/08 15:36:53 by skayed           ###   ########.fr       */
+/*   Updated: 2026/01/19 10:39:20 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,11 +70,11 @@ int	save_map(char *line, t_game *game)
 	if (!line || *line == '\0')
 		return (0);
 	if (!check_line(line))
-		return (error_exit("Invalid character in map line", game), -1);
+		return (error_exit("Invalid character in map line\n", game), -1);
 	rows = find_last_row(game->map->map);
 	new_map = copy_map(game, line, rows);
 	if (!new_map)
-		return (error_exit("Malloc failed", game), -1);
+		return (error_exit("Malloc failed\n", game), -1);
 	if (game->map->map)
 		free_matrix(game->map->map);
 	game->map->map = new_map;
