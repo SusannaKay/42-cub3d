@@ -6,7 +6,7 @@
 /*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 17:13:40 by ebonacco          #+#    #+#             */
-/*   Updated: 2026/01/19 10:39:53 by skayed           ###   ########.fr       */
+/*   Updated: 2026/02/12 14:51:48 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ void	load_frame(t_game *game, t_img *frame)
 	if (!frame->img)
 		error_exit("mlx_new_image failed\n", game);
 	frame->addr = mlx_get_data_addr(frame->img,
-									&frame->bit_pp,
-									&frame->line_len,
-									&frame->endian);
+			&frame->bit_pp,
+			&frame->line_len,
+			&frame->endian);
 	if (!frame->addr)
 		error_exit("mlx_get_data_addr failed\n", game);
 }
@@ -44,9 +44,9 @@ void	load_textures(t_game *game, t_img *texture)
 	while (i < TEX_COUNT)
 	{
 		texture[i].img = mlx_xpm_file_to_image(game->mlx,
-												game->graphics->paths[i],
-												&texture[i].w,
-												&texture[i].h);
+				game->graphics->paths[i],
+				&texture[i].w,
+				&texture[i].h);
 		if (!texture[i].img)
 			error_exit("Failed to load texture\n", game);
 		texture[i].addr = mlx_get_data_addr(texture[i].img, &texture[i].bit_pp,

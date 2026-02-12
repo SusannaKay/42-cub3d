@@ -6,15 +6,15 @@
 /*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 17:49:38 by skayed            #+#    #+#             */
-/*   Updated: 2025/10/20 14:57:20 by skayed           ###   ########.fr       */
+/*   Updated: 2026/02/12 14:53:41 by skayed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
-#define LIBFT_H
-#include <stddef.h>
-#include <stdlib.h>
-#include <unistd.h>
+# define LIBFT_H
+# include <stddef.h>
+# include <stdlib.h>
+# include <unistd.h>
 
 typedef struct s_list
 {
@@ -70,6 +70,5 @@ t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
 int					ft_printf(const char *str, ...);
 char				*get_next_line(int fd);
 char				*get_next_line_bonus(int fd);
-void				*ft_realloc(void *ptr, size_t size);
 
 #endif
