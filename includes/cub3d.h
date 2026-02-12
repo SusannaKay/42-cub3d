@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: skayed <skayed@student.42roma.it>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/12 14:28:15 by skayed            #+#    #+#             */
+/*   Updated: 2026/02/12 14:31:10 by skayed           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CUB3D_H
 # define CUB3D_H
 
@@ -5,15 +17,15 @@
 # include "../libraries/mlx/mlx.h"
 # include <X11/X.h>
 # include <X11/keysym.h>
-# include <fcntl.h>    // open, O_RDONLY, ecc.
-# include <math.h>     // funzioni matematiche (cos, sin, sqrt, ecc.)
-# include <stdio.h>    // printf, perror
-# include <stdlib.h>   // malloc, free, exit
-# include <string.h>   // strerror
-# include <sys/time.h> // gettimeofday
-# include <unistd.h>   // read, write, close, usleep
+# include <fcntl.h>
+# include <math.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <string.h>
+# include <sys/time.h>
+# include <unistd.h>
 
-# define ESC XK_Escape // eliminati i codici espliciti
+# define ESC XK_Escape
 # define W XK_w
 # define S XK_s
 # define A XK_a
@@ -64,11 +76,9 @@ typedef struct s_map
 typedef struct s_img
 {
 	void		*img;
-	// tutta l'immagine che viene pushata con mlx_put_image_to_window
 	char		*addr;
-	// permette di accedere ai dati che sono gia popolati in void *img
 	int			bit_pp;
-	int line_len; // bytes per riga
+	int			line_len;
 	int			endian;
 	int			w;
 	int			h;
@@ -92,10 +102,8 @@ typedef struct s_graphics
 	t_img		frame;
 	t_img		hand_r;
 	t_img		hand_l;
-
 	int			floor[3];
 	int			ceiling[3];
-
 	int			line_len;
 }				t_graphics;
 
@@ -148,8 +156,6 @@ void			find_plane(t_map *map);
 void			init_delta(t_map *map);
 void			init_step(t_map *map);
 void			init_side(t_map *map);
-void			draw_col(t_game *game, int x, int start, int end,
-					unsigned int color);
 void			height_limits(int line_h, int *start, int *end);
 double			distance(t_map *map);
 void			put_pixel(t_img *frame, int x, int y, unsigned int color);
@@ -162,6 +168,6 @@ void			draw_hand(t_game *game, t_img *hand, int off_x, int off_y);
 void			draw_texture(t_game *game, t_wall *wall);
 int				exit_destroy(t_game *game);
 int				check_char(char c);
-void	free_all(t_game *game);
+void			free_all(t_game *game);
 
 #endif
